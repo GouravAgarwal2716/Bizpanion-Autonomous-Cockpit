@@ -1,0 +1,171 @@
+import { jsPDF } from 'jspdf';
+
+export function generateExecutiveReportPDF(dashboardData: any, businessId: string) {
+  try {
+    const doc = new jsPDF();
+    const dateStr = new Date().toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+
+    // Header Banner
+    doc.setFillColor(15, 23, 42); // Deep navy
+    doc.rect(0, 0, 210, 38, 'F');
+
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(22);
+    doc.setFont('helvetica', 'bold');
+    doc.text('BIZPANION', 14, 18);
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(234, 179, 8); // Warm Yellow
+    doc.text('AUTONOMOUS BUSINESS COCKPIT EXECUTIVE REPORT', 14, 26);
+
+    doc.setTextColor(148, 163, 184);
+    doc.text(`Date: ${dateStr}  |  Business ID: ${businessId || 'DEMO-123'}`, 120, 26);
+
+    // Section 1: Financial Highlights
+    let y = 50;
+    doc.setTextColor(15, 23, 42);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('1. FINANCIAL HIGHLIGHTS & WORKING CAPITAL', 14, y);
+    
+    doc.setLineWidth(0.5);
+    doc.setDrawColor(226, 232, 240);
+    doc.line(14, y + 3, 196, y + 3);
+
+    y += 14;
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+
+    // KPI Boxes
+    const kpis = [
+      { label: 'Total Turnover', val: `Rs. ${(dashboardData?.kpis?.revenue?.value || 1641657).toLocaleString('en-IN')}` },
+      { label: 'Operating Net Cash', val: `Rs. ${(dashboardData?.kpis?.net_cash?.value || 428000).toLocaleString('en-IN')}` },
+      { label: 'Runway Buffer', val: `${dashboardData?.kpis?.runway_days?.value || 38} Days` },
+    ];
+
+    kpis.forEach((kpi, idx) => {
+      const x = 14 + idx * 62;
+      doc.setFillColor(248, 250, 252);
+      doc.roundedRect(x, y, 56, 24, 3, 3, 'F');
+      doc.rect(x, y, 56, 24, 'S');
+
+      doc.setTextColor(100, 116, 139);
+      doc.setFontSize(8);
+      doc.text(kpi.label.toUpperCase(), x + 4, y + 8);
+
+      doc.setTextColor(15, 23, 42);
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'bold');
+      doc.text(kpi.val, x + 4, y + 18);
+    });
+
+    // Section 2: Agmarknet Wholesale Price Parity
+    y += 38;
+    doc.setTextColor(15, 23, 42);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('2. WHOLESALE MANDI PRICE PARITY INDEX', 14, y);
+    doc.line(14, y + 3, 196, y + 3);
+
+    y += 12;
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'bold');
+    doc.setFillColor(241, 245, 249);
+    doc.rect(14, y, 182, 8, 'F');
+    
+    doc.setTextColor(51, 65, 85);
+    doc.text('SKU / Commodity Name', 18, y + 6);
+    doc.text('Your Rate', 90, y + 6);
+    doc.text('Mandi Rate', 125, y + 6);
+    doc.text('Margin Status', 160, y + 6);
+
+    const items = [
+      { name: 'Aashirvaad Shuddh Chakki Atta 10kg', rate: 'Rs. 380/bag', mandi: 'Rs. 398/bag', status: 'Below Parity (-4.5%)' },
+      { name: 'Fortune Sunlite Refined Oil 1L', rate: 'Rs. 135/pouch', mandi: 'Rs. 132/pouch', status: 'Optimal (+2.2%)' },
+      { name: 'Tata Salt Vacuum Evaporated 1kg', rate: 'Rs. 26/pkt', mandi: 'Rs. 27/pkt', status: 'Slight Discount' },
+      { name: 'Toor Dal Premium Unpolished 1kg', rate: 'Rs. 155/kg', mandi: 'Rs. 160/kg', status: 'Below Parity (-3.1%)' },
+    ];
+
+    y += 8;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+
+    items.forEach((item, idx) => {
+      y += 8;
+      if (idx % 2 === 1) {
+        doc.setFillColor(248, 250, 252);
+        doc.rect(14, y - 6, 182, 8, 'F');
+      }
+      doc.setTextColor(15, 23, 42);
+      doc.text(item.name, 18, y);
+      doc.text(item.rate, 90, y);
+      doc.text(item.mandi, 125, y);
+      
+      if (item.status.includes('Below')) {
+        doc.setTextColor(225, 29, 72); // Red
+      } else {
+        doc.setTextColor(202, 138, 4); // Yellow/Gold
+      }
+      doc.text(item.status, 160, y);
+    });
+
+    // Section 3: Matched Government Credit Schemes
+    y += 24;
+    doc.setTextColor(15, 23, 42);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('3. MATCHED GOVERNMENT MSME SCHEMES', 14, y);
+    doc.line(14, y + 3, 196, y + 3);
+
+    y += 12;
+    const schemes = [
+      { title: 'PM SVANidhi Micro-Credit', desc: 'Collateral-free working capital loan up to Rs. 50,000 with 7% interest subvention.' },
+      { title: 'PMEGP Capital Credit Subsidy', desc: 'Up to 35% margin money subsidy for enterprise expansion and machinery purchase.' },
+      { title: 'Mudra Shishu Assistance', desc: 'Rs. 50,000 instant credit line for stock procurement during demand surges.' },
+    ];
+
+    schemes.forEach((sch) => {
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(15, 23, 42);
+      doc.text(`- ${sch.title}`, 18, y);
+
+      y += 5;
+      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(100, 116, 139);
+      doc.text(sch.desc, 22, y);
+      y += 9;
+    });
+
+    // Footer
+    doc.setFontSize(8);
+    doc.setTextColor(148, 163, 184);
+    doc.text('Generated by Bizpanion Autonomous Business Copilot - Powered by PyTorch & Featherless.ai', 14, 285);
+
+    const fileName = `Bizpanion_Executive_Report_${new Date().toISOString().split('T')[0]}.pdf`;
+    try {
+      doc.save(fileName);
+    } catch (saveErr) {
+      console.warn("jsPDF save fallback triggered:", saveErr);
+      const pdfBlob = doc.output('blob');
+      const blobUrl = URL.createObjectURL(pdfBlob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+      }, 100);
+    }
+  } catch (err) {
+    console.error("PDF generation error:", err);
+  }
+}
