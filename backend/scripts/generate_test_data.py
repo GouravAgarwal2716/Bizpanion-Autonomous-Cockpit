@@ -3,6 +3,9 @@ Generate synthetic test CSV files that demonstrate the pipeline's cleaning capab
 Creates 3 CSVs: clean data, messy data, and a mixed edge-case file.
 Run: python generate_test_data.py
 """
+import sys
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 import pandas as pd
 import numpy as np
 import os

@@ -40,6 +40,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Ensure audio cache directory exists before mounting
+os.makedirs(settings.AUDIO_CACHE_DIR, exist_ok=True)
+os.makedirs("models", exist_ok=True)
+
 # Serve cached audio files
 app.mount("/audio", StaticFiles(directory=settings.AUDIO_CACHE_DIR), name="audio")
 

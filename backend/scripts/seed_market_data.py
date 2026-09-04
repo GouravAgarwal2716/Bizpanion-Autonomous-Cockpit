@@ -6,6 +6,8 @@ Data is sourced from real Agmarknet records (data.gov.in).
 import asyncio
 import sys
 import os
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from services.supabase_client import bulk_insert_market_prices

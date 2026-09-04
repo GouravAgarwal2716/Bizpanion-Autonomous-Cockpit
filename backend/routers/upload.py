@@ -89,7 +89,9 @@ async def upload_csv(
         yield f"data: {json.dumps({'type': 'step', 'step': 'agents', 'status': 'running', 'message': 'Running autonomous analysis agents...'})}\n\n"
         try:
             agent_result = await run_agent_pipeline(business_id, trigger="new_data")
-            yield f"data: {json.dumps({'type': 'step', 'step': 'agents', 'status': 'done', 'message': f'Analysis complete: {agent_result[\"alerts_generated\"]} alerts generated, {agent_result[\"whatsapp_sent\"]} WhatsApp sent'})}\n\n"
+            n_alerts = agent_result.get("alerts_generated", 0)
+            n_wa = agent_result.get("whatsapp_sent", 0)
+            yield f"data: {json.dumps({'type': 'step', 'step': 'agents', 'status': 'done', 'message': f'Analysis complete: {n_alerts} alerts generated, {n_wa} WhatsApp sent'})}\n\n"
         except Exception as e:
             yield f"data: {json.dumps({'type': 'step', 'step': 'agents', 'status': 'error', 'message': f'Agent pipeline error: {str(e)}'})}\n\n"
 
