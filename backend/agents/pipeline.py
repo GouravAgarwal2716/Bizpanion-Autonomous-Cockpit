@@ -63,6 +63,26 @@ async def data_agent_node(state: PipelineState) -> PipelineState:
             db.get_transactions(bid, limit=500),
             db.get_inventory(bid),
         )
+        # If inventory is empty but we have transactions, dynamically seed inventory from txns
+        if not inv and txns:
+            item_counts = {}
+            for t in txns:
+                iname = t.get("item_name", "Item")
+                if iname not in item_counts:
+                    item_counts[iname] = {
+                        "business_id": bid,
+                        "item_name": iname,
+                        "current_stock": max(5.0, round(float(t.get("quantity", 10)) * 2.5, 1)),
+                        "unit": t.get("unit", "pcs"),
+                        "category": t.get("category", "general"),
+                        "reorder_level": 10.0,
+                    }
+            inv = list(item_counts.values())[:15]
+            try:
+                await db.upsert_inventory(inv)
+            except Exception:
+                pass
+
         state["transactions"] = txns
         state["inventory"] = inv
         logger.info(f"[{state['run_id']}] Data Agent: loaded {len(txns)} txns, {len(inv)} inv items")
@@ -75,30 +95,23 @@ async def data_agent_node(state: PipelineState) -> PipelineState:
 # ─── Node: Market Data ─────────────────────────────────────────────────────────
 
 async def market_data_node(state: PipelineState) -> PipelineState:
-    """Fetches regional market prices for items in inventory."""
+    """Fetches regional market prices and benchmarks for items in business inventory/transactions."""
     try:
         from services.supabase_client import get_supabase
         sb = get_supabase()
         profile = state["profile"]
-        region = profile.get("region", "")
         
-        # Get all unique items from transactions
-        items = list({t.get("category", "") for t in state["transactions"]})
-        
-        market_rows = []
-        for item in items[:10]:  # limit to 10 items per run
-            res = (
-                sb.table("market_prices")
-                .select("*")
-                .ilike("commodity", f"%{item.split('_')[0][:5]}%")
-                .order("date", desc=True)
-                .limit(3)
-                .execute()
-            )
-            market_rows.extend(res.data or [])
-        
+        # Load latest benchmark prices
+        res = (
+            sb.table("market_prices")
+            .select("*")
+            .order("date", desc=True)
+            .limit(100)
+            .execute()
+        )
+        market_rows = res.data or []
         state["market_prices"] = market_rows
-        logger.info(f"[{state['run_id']}] Market Data: {len(market_rows)} price records")
+        logger.info(f"[{state['run_id']}] Market Data: {len(market_rows)} price records loaded")
     except Exception as e:
         state["errors"].append(f"Market data error: {e}")
         logger.error(f"[{state['run_id']}] Market data failed: {e}")
@@ -111,8 +124,8 @@ async def rag_agent_node(state: PipelineState) -> PipelineState:
     """Queries Pinecone for scheme eligibility and deadline matches."""
     try:
         profile = state["profile"]
-        urgent = await check_scheme_deadlines(
-            business_type=profile.get("business_type", ""),
+        urgent = check_scheme_deadlines(
+            business_type=profile.get("business_type", "all"),
             region=profile.get("region", ""),
             days_window=settings.SCHEME_DEADLINE_DAYS,
         )
@@ -138,9 +151,9 @@ async def analysis_agent_node(state: PipelineState) -> PipelineState:
             item_txns = [
                 t for t in state["transactions"]
                 if t.get("item_name", "").lower() == item.get("item_name", "").lower()
-                and t.get("transaction_type") == "sale"
+                and str(t.get("transaction_type", "")).lower() in ("sale", "sales")
             ]
-            if len(item_txns) < 5:
+            if len(item_txns) < 3:
                 continue
             
             forecast = model.predict(item_txns, days_ahead=settings.STOCK_DEPLETION_DAYS_AHEAD)
@@ -280,16 +293,17 @@ Write ONLY the message, no preamble. Use local currency ₹ for amounts.
             action = await call_llm(action_prompt, language=language, max_tokens=60)
             action_en = await call_llm(action_prompt, language=Language.ENGLISH, max_tokens=60) if language != Language.ENGLISH else action
         except Exception:
-            action = ""
-            action_en = ""
+            action = _fallback_action(anomaly, language)
+            action_en = _fallback_action(anomaly, Language.ENGLISH)
 
-        # Generate TTS audio (cached)
+        # Generate TTS audio for top alerts with quick timeout
         audio_url = None
-        try:
-            cache_key = f"alert_{alert_type}_{business_id}_{hash(message[:30]) & 0xFFFF}"
-            audio_url = await text_to_speech(message, language=language, cache_key=cache_key)
-        except Exception as e:
-            logger.warning(f"TTS failed for alert: {e}")
+        if len(alerts) < 2:
+            try:
+                cache_key = f"alert_{alert_type}_{business_id}_{hash(message[:30]) & 0xFFFF}"
+                audio_url = await asyncio.wait_for(text_to_speech(message, language=language, cache_key=cache_key), timeout=3.5)
+            except Exception as e:
+                logger.warning(f"TTS skipped/failed for alert: {e}")
 
         alert = {
             "id": str(uuid.uuid4()),
@@ -412,8 +426,98 @@ def _get_title(anomaly: dict, language: Language) -> str:
 
 
 def _fallback_message(anomaly: dict, language: Language) -> str:
-    """Fallback message when LLM is unavailable."""
+    """Localized fallback message when LLM is unavailable or times out."""
+    alert_type = anomaly.get("alert_type")
+    lang = language.value if hasattr(language, 'value') else str(language)
+    
+    if alert_type == "underpricing":
+        iname = anomaly.get('item_name', 'Item')
+        uprice = anomaly.get('user_price', 0)
+        mprice = anomaly.get('market_price', 0)
+        dev = anomaly.get('deviation_pct', 0)
+        loss = anomaly.get('potential_revenue_loss_per_unit', 0)
+        if lang == "hi":
+            return f"{iname}: आपकी विक्रय दर ₹{uprice}/unit है, जो क्षेत्रीय मंडी भाव ₹{mprice}/unit से {dev}% कम है। प्रति इकाई ₹{loss} का मार्जिन नुकसान हो रहा है।"
+        elif lang == "ta":
+            return f"{iname}: உங்கள் விற்பனை விலை ₹{uprice}/unit, மண்டல சந்தை விலை ₹{mprice}/unit ஐ விட {dev}% குறைவாக உள்ளது. யூனிட்டுக்கு ₹{loss} இழப்பு ஏற்படுகிறது."
+        elif lang == "te":
+            return f"{iname}: మీ అమ్మకపు ధర ₹{uprice}/unit, మార్కెట్ ధర ₹{mprice}/unit కంటే {dev}% తక్కువగా ఉంది. యూనిట్‌కు ₹{loss} నష్టం జరుగుతోంది."
+        elif lang == "kn":
+            return f"{iname}: ನಿಮ್ಮ ಮಾರಾಟ ದರ ₹{uprice}/unit, ಮಾರುಕಟ್ಟೆ ದರ ₹{mprice}/unit ಗಿಂತ {dev}% ಕಡಿಮೆಯಾಗಿದೆ. ಯೂನಿಟ್‌ಗೆ ₹{loss} ನಷ್ಟವಾಗುತ್ತಿದೆ."
+        else:
+            return f"{iname} is being sold at ₹{uprice}/unit, which is {dev}% below the regional wholesale market rate of ₹{mprice}/unit. You are losing ₹{loss} margin per unit."
+
+    elif alert_type == "stock_depletion":
+        iname = anomaly.get('item_name', 'Item')
+        cstock = anomaly.get('current_stock', 0)
+        unit = anomaly.get('unit', 'unit')
+        days = anomaly.get('days_until_stockout', 2)
+        if lang == "hi":
+            return f"{iname}: वर्तमान स्टॉक केवल {cstock} {unit} शेष है। अनुमानित मांग के अनुसार यह {days} दिनों में समाप्त हो जाएगा। तुरंत पुनः ऑर्डर करें।"
+        elif lang == "ta":
+            return f"{iname}: இருப்பு {cstock} {unit} மட்டுமே உள்ளது. அடுத்த {days} நாட்களில் தீர்ந்துவிடும். உடனடியாக மீண்டும் ஆர்டர் செய்யவும்."
+        elif lang == "te":
+            return f"{iname}: ప్రస్తుత స్టాక్ {cstock} {unit} మాత్రమే ఉంది. రాబోయే {days} రోజుల్లో స్టాక్ అయిపోతుంది. వెంటనే ఆర్డర్ చేయండి."
+        elif lang == "kn":
+            return f"{iname}: ಪ್ರಸ್ತುತ ದಾಸ್ತಾನು {cstock} {unit} ಮಾತ್ರ ಇದೆ. ಮುಂದಿನ {days} ದಿನಗಳಲ್ಲಿ ಖಾಲಿಯಾಗಲಿದೆ. ತಕ್ಷಣವೇ ಮರುಆರ್ಡರ್ ಮಾಡಿ."
+        else:
+            return f"{iname} stock is critically low at {cstock} {unit}. At current sales velocity, stock will deplete in approximately {days} days."
+
+    elif alert_type == "scheme_deadline":
+        sname = anomaly.get('scheme_name', 'Government Scheme')
+        days = anomaly.get('days_remaining', 15)
+        benefit = anomaly.get('benefit', 'Credit facility')
+        if lang == "hi":
+            return f"{sname}: आवेदन की अंतिम तिथि निकट है ({days} दिन शेष)। लाभ: {benefit}।"
+        elif lang == "ta":
+            return f"{sname}: விண்ணப்பிக்க கடைசி தேதி நெருங்குகிறது ({days} நாட்கள் மட்டுமே). பலன்: {benefit}."
+        elif lang == "te":
+            return f"{sname}: దరఖాస్తు గడువు సమీపిస్తోంది ({days} రోజులు మిగిలి ఉన్నాయి). ప్రయోజనం: {benefit}."
+        elif lang == "kn":
+            return f"{sname}: ಅರ್ಜಿ ಸಲ್ಲಿಕೆಯ ಅಂತಿಮ ದಿನಾಂಕ ಹತ್ತಿರವಾಗುತ್ತಿದೆ ({days} ದಿನಗಳು ಬಾಕಿ). ಲಾಭ: {benefit}."
+        else:
+            return f"{sname} deadline is approaching ({days} days remaining). Available benefit: {benefit}."
+
+    elif alert_type == "sales_anomaly":
+        date = anomaly.get('date', 'recent')
+        dsales = anomaly.get('daily_sales', 0)
+        pct = anomaly.get('pct_change', 0)
+        if lang == "hi":
+            return f"{date} को बिक्री में असामान्य परिवर्तन ({pct}%) दर्ज हुआ। कुल दैनिक बिक्री ₹{dsales} रही।"
+        elif lang == "ta":
+            return f"{date} அன்று விற்பனையில் அசாதாரண மாற்றம் ({pct}%) பதிவானது. தினசரி விற்பனை ₹{dsales}."
+        elif lang == "te":
+            return f"{date}న అమ్మకాల్లో అసాధారణ మార్పు ({pct}%) కనిపించింది. రోజువారీ మొత్తం ₹{dsales}."
+        elif lang == "kn":
+            return f"{date} ರಂದು ಮಾರಾಟದಲ್ಲಿ ಅಸಾಮಾನ್ಯ ಬದಲಾವಣೆ ({pct}%) ಕಂಡುಬಂದಿದೆ. ಒಟ್ಟು ಮೊತ್ತ ₹{dsales}."
+        else:
+            return f"Sales anomaly of {pct}% detected on {date}. Daily sales recorded at ₹{dsales}."
+
     return _build_data_context(anomaly)
+
+
+def _fallback_action(anomaly: dict, language: Language) -> str:
+    alert_type = anomaly.get("alert_type")
+    lang = language.value if hasattr(language, 'value') else str(language)
+    if alert_type == "underpricing":
+        if lang == "hi": return "मार्जिन सुरक्षा हेतु विक्रय मूल्य को मंडी दर के अनुरूप बढ़ाएं।"
+        if lang == "ta": return "லாபத்தைப் பாதுகாக்க விற்பனை விலையை சந்தை விலைக்கு உயர்த்தவும்."
+        if lang == "te": return "లాభం కాపాడుకోవడానికి అమ్మకపు ధరను మార్కెట్ రేటుకు పెంచండి."
+        if lang == "kn": return "ಲಾಭಾಂಶ ಉಳಿಸಲು ಮಾರಾಟ ದರವನ್ನು ಮಾರುಕಟ್ಟೆ ದರಕ್ಕೆ ಸರಿಹೊಂದಿಸಿ."
+        return "Increase selling price in Decision Sandbox to match regional benchmark."
+    elif alert_type == "stock_depletion":
+        if lang == "hi": return "स्टॉक खत्म होने से पहले वितरक से थोक आपूर्ति ऑर्डर करें।"
+        if lang == "ta": return "சரக்கு தீருமுன் விநியோகஸ்தரிடம் மொத்தமாக ஆர்டர் செய்யவும்."
+        if lang == "te": return "స్టాక్ ముగిసేలోపు సరఫరాదారుడికి హోల్‌సేల్ ఆర్డర్ ఇవ్వండి."
+        if lang == "kn": return "ಖಾಲಿಯಾಗುವ ಮುನ್ನ ಸಗಟು ಪೂರೈಕೆದಾರರಿಗೆ ಆರ್ಡರ್ ಮಾಡಿ."
+        return "Place wholesale replenishment order before customer stockout."
+    elif alert_type == "scheme_deadline":
+        if lang == "hi": return "समयसीमा समाप्त होने से पहले सरकारी पोर्टल पर तुरंत आवेदन करें।"
+        if lang == "ta": return "காலக்கெடு முடிவதற்குள் அரசு போர்ட்டலில் உடனடியாக விண்ணப்பிக்கவும்."
+        if lang == "te": return "గడువు ముగిసేలోపు ప్రభుత్వ పోర్టల్‌లో వెంటనే దరఖాస్తు చేసుకోండి."
+        if lang == "kn": return "ಅಂತಿಮ ಗಡುವಿನೊಳಗೆ ಸರ್ಕಾರಿ ಪೋರ್ಟಲ್‌ನಲ್ಲಿ ತಕ್ಷಣ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ."
+        return "Submit application on official scheme portal before window closes."
+    return "Review telemetry in Decision Sandbox."
 
 
 # ─── Build LangGraph ─────────────────────────────────────────────────────────
@@ -434,14 +538,10 @@ def build_pipeline() -> StateGraph:
     graph.set_entry_point("planner")
     graph.add_edge("planner", "data_agent")
     
-    # Parallel data gathering
+    # Sequential data enrichment pipeline (deterministic state progression)
     graph.add_edge("data_agent", "market_data")
-    graph.add_edge("data_agent", "rag_agent")
-    graph.add_edge("data_agent", "analysis_agent")
-    
-    # All converge into anomaly detection
-    graph.add_edge("market_data", "anomaly_detection")
-    graph.add_edge("rag_agent", "anomaly_detection")
+    graph.add_edge("market_data", "rag_agent")
+    graph.add_edge("rag_agent", "analysis_agent")
     graph.add_edge("analysis_agent", "anomaly_detection")
     
     graph.add_edge("anomaly_detection", "severity_agent")

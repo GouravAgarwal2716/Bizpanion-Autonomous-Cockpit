@@ -1,0 +1,121 @@
+date,item_name,category,quantity,unit,selling_price_per_unit,total_amount,transaction_type
+2026-07-21 08:42:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1398,4194,sales
+2026-07-21 10:47:00,Amul Butter 500g,dairy,3,pack,275,825,sales
+2026-07-21 10:55:00,Cattle Feed SuperMash 50kg,dairy,1,bag,1401,1401,sales
+2026-07-22 12:01:00,Fresh Curd / Dahi 500g,dairy,25,tub,42,1050,sales
+2026-07-23 03:01:00,Desi Cow Ghee 1L,dairy,5,jar,649,3245,sales
+2026-07-23 06:37:00,Amul Butter 500g,dairy,4,pack,276,1104,sales
+2026-07-24 05:04:00,Desi Cow Ghee 1L,dairy,2,jar,651,1302,sales
+2026-07-24 13:02:00,Fresh Curd / Dahi 500g,dairy,7,tub,38,266,sales
+2026-07-25 05:57:00,Malai Paneer Fresh,dairy,18,kg,310,5580,purchase
+2026-07-25 06:25:00,Khoya / Mawa Fresh,dairy,5,kg,322,1610,sales
+2026-07-25 12:44:00,Pure Cow Milk,dairy,31,litre,54,1674,sales
+2026-07-26 06:17:00,Fresh Buffalo Milk,dairy,57,litre,71,4047,sales
+2026-07-26 12:19:00,Pure Cow Milk,dairy,49,litre,55,2695,sales
+2026-07-26 15:17:00,Pure Cow Milk,dairy,62,litre,53,3286,sales
+2026-07-27 11:54:00,Desi Cow Ghee 1L,dairy,3,jar,649,1947,sales
+2026-07-28 09:27:00,Pure Cow Milk,dairy,39,litre,55,2145,sales
+2026-07-29 09:24:00,Cattle Feed SuperMash 50kg,dairy,2,bag,1400,2800,sales
+2026-07-29 09:46:00,Cattle Feed SuperMash 50kg,dairy,18,bag,1250,22500,purchase
+2026-07-29 15:12:00,Malai Paneer Fresh,dairy,9,kg,370,3330,sales
+2026-07-30 10:38:00,Amul Butter 500g,dairy,4,pack,274,1096,sales
+2026-07-30 10:53:00,Fresh Curd / Dahi 500g,dairy,18,tub,42,756,sales
+2026-07-30 13:36:00,Desi Cow Ghee 1L,dairy,5,jar,653,3265,sales
+2026-07-31 11:09:00,Malai Paneer Fresh,dairy,8,kg,310,2480,purchase
+2026-08-01 05:41:00,Fresh Buffalo Milk,dairy,53,litre,66,3498,sales
+2026-08-01 07:02:00,Fresh Curd / Dahi 500g,dairy,13,tub,41,533,sales
+2026-08-01 09:00:00,Malai Paneer Fresh,dairy,4,kg,368,1472,sales
+2026-08-01 09:32:00,Amul Butter 500g,dairy,6,pack,276,1656,sales
+2026-08-02 06:39:00,Pure Cow Milk,dairy,48,litre,50,2400,sales
+2026-08-02 12:03:00,Khoya / Mawa Fresh,dairy,6,kg,319,1914,sales
+2026-08-02 12:21:00,Fresh Buffalo Milk,dairy,57,litre,70,3990,sales
+2026-08-03 06:32:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1398,4194,sales
+2026-08-03 07:58:00,Pure Cow Milk,dairy,63,litre,52,3276,sales
+2026-08-03 13:32:00,Amul Butter 500g,dairy,6,pack,277,1662,sales
+2026-08-03 14:59:00,Desi Cow Ghee 1L,dairy,3,jar,652,1956,sales
+2026-08-04 03:44:00,Khoya / Mawa Fresh,dairy,4,kg,323,1292,sales
+2026-08-04 08:11:00,Khoya / Mawa Fresh,dairy,1,kg,321,321,sales
+2026-08-04 14:08:00,Pure Cow Milk,dairy,24,litre,54,1296,sales
+2026-08-05 14:19:00,Malai Paneer Fresh,dairy,6,kg,372,2232,sales
+2026-08-05 14:40:00,Fresh Curd / Dahi 500g,dairy,17,tub,42,714,sales
+2026-08-06 15:23:00,Khoya / Mawa Fresh,dairy,1,kg,320,320,sales
+2026-08-07 05:54:00,Amul Butter 500g,dairy,5,pack,273,1365,sales
+2026-08-08 05:54:00,Amul Butter 500g,dairy,4,pack,273,1092,sales
+2026-08-08 06:17:00,Malai Paneer Fresh,dairy,3,kg,372,1116,sales
+2026-08-08 10:40:00,Pure Cow Milk,dairy,41,litre,53,2173,sales
+2026-08-09 04:58:00,Cattle Feed SuperMash 50kg,dairy,5,bag,1250,6250,purchase
+2026-08-10 06:17:00,Desi Cow Ghee 1L,dairy,5,jar,649,3245,sales
+2026-08-10 07:15:00,Desi Cow Ghee 1L,dairy,3,jar,648,1944,sales
+2026-08-10 08:01:00,Khoya / Mawa Fresh,dairy,6,kg,319,1914,sales
+2026-08-10 08:37:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1399,4197,sales
+2026-08-10 08:54:00,Desi Cow Ghee 1L,dairy,3,jar,652,1956,sales
+2026-08-10 09:18:00,Malai Paneer Fresh,dairy,2,kg,369,738,sales
+2026-08-10 09:31:00,Khoya / Mawa Fresh,dairy,3,kg,323,969,sales
+2026-08-11 03:52:00,Fresh Buffalo Milk,dairy,50,litre,70,3500,sales
+2026-08-11 05:13:00,Fresh Curd / Dahi 500g,dairy,25,tub,40,1000,sales
+2026-08-11 06:12:00,Amul Butter 500g,dairy,8,pack,273,2184,sales
+2026-08-12 09:53:00,Fresh Curd / Dahi 500g,dairy,23,tub,41,943,sales
+2026-08-12 15:49:00,Malai Paneer Fresh,dairy,8,kg,368,2944,sales
+2026-08-13 05:53:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1401,4203,sales
+2026-08-13 08:35:00,Cattle Feed SuperMash 50kg,dairy,2,bag,1401,2802,sales
+2026-08-13 12:39:00,Malai Paneer Fresh,dairy,21,kg,310,6510,purchase
+2026-08-14 03:24:00,Pure Cow Milk,dairy,29,litre,51,1479,sales
+2026-08-14 04:34:00,Malai Paneer Fresh,dairy,10,kg,370,3700,sales
+2026-08-14 05:44:00,Khoya / Mawa Fresh,dairy,6,kg,321,1926,sales
+2026-08-14 15:00:00,Amul Butter 500g,dairy,3,pack,274,822,sales
+2026-08-15 04:35:00,Fresh Curd / Dahi 500g,dairy,20,tub,41,820,sales
+2026-08-15 05:33:00,Fresh Curd / Dahi 500g,dairy,14,tub,39,546,sales
+2026-08-15 05:34:00,Pure Cow Milk,dairy,240,litre,44,10560,purchase
+2026-08-15 06:21:00,Fresh Buffalo Milk,dairy,21,litre,67,1407,sales
+2026-08-15 08:19:00,Fresh Buffalo Milk,dairy,270,litre,58,15660,purchase
+2026-08-15 08:53:00,Pure Cow Milk,dairy,54,litre,51,2754,sales
+2026-08-15 15:15:00,Malai Paneer Fresh,dairy,2,kg,372,744,sales
+2026-08-16 04:05:00,Khoya / Mawa Fresh,dairy,4,kg,318,1272,sales
+2026-08-16 04:42:00,Fresh Buffalo Milk,dairy,57,litre,69,3933,sales
+2026-08-16 04:52:00,Amul Butter 500g,dairy,14,pack,235,3290,purchase
+2026-08-16 05:26:00,Malai Paneer Fresh,dairy,49,kg,310,15190,purchase
+2026-08-16 08:28:00,Cattle Feed SuperMash 50kg,dairy,9,bag,1250,11250,purchase
+2026-08-16 08:30:00,Amul Butter 500g,dairy,2,pack,275,550,sales
+2026-08-16 15:46:00,Fresh Curd / Dahi 500g,dairy,19,tub,38,722,sales
+2026-08-17 09:07:00,Amul Butter 500g,dairy,3,pack,276,828,sales
+2026-08-17 15:24:00,Fresh Buffalo Milk,dairy,46,litre,68,3128,sales
+2026-08-17 15:49:00,Fresh Curd / Dahi 500g,dairy,14,tub,40,560,sales
+2026-08-18 05:12:00,Malai Paneer Fresh,dairy,2,kg,370,740,sales
+2026-08-18 15:52:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1398,4194,sales
+2026-08-19 14:25:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1399,4197,sales
+2026-08-19 14:51:00,Fresh Curd / Dahi 500g,dairy,24,tub,39,936,sales
+2026-08-20 04:55:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1403,4209,sales
+2026-08-20 06:09:00,Khoya / Mawa Fresh,dairy,2,kg,322,644,sales
+2026-08-20 08:20:00,Fresh Curd / Dahi 500g,dairy,5,tub,41,205,sales
+2026-08-21 11:25:00,Malai Paneer Fresh,dairy,9,kg,373,3357,sales
+2026-08-21 13:18:00,Amul Butter 500g,dairy,2,pack,275,550,sales
+2026-08-23 06:33:00,Amul Butter 500g,dairy,5,pack,275,1375,sales
+2026-08-23 12:47:00,Amul Butter 500g,dairy,6,pack,277,1662,sales
+2026-08-24 03:41:00,Fresh Curd / Dahi 500g,dairy,19,tub,43,817,sales
+2026-08-25 03:03:00,Fresh Buffalo Milk,dairy,24,litre,67,1608,sales
+2026-08-25 03:46:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1400,4200,sales
+2026-08-25 04:20:00,Fresh Buffalo Milk,dairy,192,litre,58,11136,purchase
+2026-08-26 14:43:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1400,4200,sales
+2026-08-27 04:48:00,Khoya / Mawa Fresh,dairy,40,kg,260,10400,purchase
+2026-08-27 08:55:00,Desi Cow Ghee 1L,dairy,5,jar,648,3240,sales
+2026-08-27 09:59:00,Khoya / Mawa Fresh,dairy,5,kg,321,1605,sales
+2026-08-28 05:37:00,Khoya / Mawa Fresh,dairy,12,kg,260,3120,purchase
+2026-08-28 05:46:00,Amul Butter 500g,dairy,30,pack,235,7050,purchase
+2026-08-28 08:50:00,Fresh Curd / Dahi 500g,dairy,6,tub,40,240,sales
+2026-08-29 03:35:00,Fresh Buffalo Milk,dairy,22,litre,69,1518,sales
+2026-08-29 06:58:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1400,4200,sales
+2026-08-29 10:06:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1403,4209,sales
+2026-08-29 10:22:00,Malai Paneer Fresh,dairy,42,kg,310,13020,purchase
+2026-08-30 03:25:00,Desi Cow Ghee 1L,dairy,2,jar,650,1300,sales
+2026-08-30 14:00:00,Cattle Feed SuperMash 50kg,dairy,3,bag,1401,4203,sales
+2026-08-30 14:07:00,Pure Cow Milk,dairy,208,litre,44,9152,purchase
+2026-08-31 03:39:00,Desi Cow Ghee 1L,dairy,5,jar,649,3245,sales
+2026-08-31 11:22:00,Fresh Curd / Dahi 500g,dairy,23,tub,42,966,sales
+2026-08-31 11:38:00,Khoya / Mawa Fresh,dairy,2,kg,322,644,sales
+2026-09-02 14:42:00,Desi Cow Ghee 1L,dairy,2,jar,650,1300,sales
+2026-09-02 14:46:00,Fresh Buffalo Milk,dairy,58,litre,68,3944,sales
+2026-09-03 05:05:00,Amul Butter 500g,dairy,3,pack,277,831,sales
+2026-09-03 07:34:00,Pure Cow Milk,dairy,73,litre,50,3650,sales
+2026-09-03 10:10:00,Desi Cow Ghee 1L,dairy,1,jar,649,649,sales
+2026-09-03 11:14:00,Fresh Curd / Dahi 500g,dairy,23,tub,43,989,sales
+2026-09-03 12:41:00,Desi Cow Ghee 1L,dairy,3,jar,650,1950,sales

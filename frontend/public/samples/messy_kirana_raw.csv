@@ -1,0 +1,13 @@
+date,item_name,category,quantity,unit,selling_price_per_unit,total_amount,transaction_type
+24/07/2026,Tata Tea Premium 500g,,2,,₹ 273.00,₹ 546.00,sales
+2026.07.25,Basmati Rice 5kg,groceries,3,bag,438.00,1314.00,credit
+26-Jul-2026,Sugar M-Grade 1kg,,10,,₹ 44.50,,sell
+2026-07-27,Aashirvaad Atta 5kg,groceries,5,bag,₹ 260.00,1300.00,sales
+28/07/2026,Toor Dal 1kg,,15,kg,135/-,2025.00,purchase
+29-07-2026,MDH Garam Masala 100g,groceries,8,box,₹ 96.00,,sales
+July 30 2026,Toor Dal 1kg,,4,,₹ 145.00,₹ 580.00,sales
+2026-07-31,Maggi 70g Noodles,groceries,25,packet,14.00,350.00,sale
+01/08/2026,Basmati Rice 5kg,,2,bag,440.00,880.00,sales
+2026.08.02,Sugar M-Grade 1kg,groceries,12,,₹ 45.00,₹ 540.00,bill
+03-Aug-2026,MDH Garam Masala 100g,,6,box,₹ 98.00,588.00,sales
+2026-08-04,Aashirvaad Atta 5kg,groceries,4,bag,265.00,1060.00,sales

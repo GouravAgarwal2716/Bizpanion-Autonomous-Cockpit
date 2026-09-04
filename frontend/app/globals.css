@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-dark: #080c14;
+    --bg-sidebar: #0c1017;
+    --bg-card: #0f1726;
+    --bg-card-hover: #131b2a;
+    --bg-input: #0c121e;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent-yellow: #eab308;
+    --accent-yellow-light: #facc15;
+    --accent-yellow-dark: #ca8a04;
+    --accent-yellow-glow: rgba(234, 179, 8, 0.15);
+  }
+
+  [data-theme="light"] {
+    --bg-dark: #f8fafc;
+    --bg-sidebar: #ffffff;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f1f5f9;
+    --bg-input: #f1f5f9;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-strong: rgba(0, 0, 0, 0.18);
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --accent-yellow: #ca8a04;
+    --accent-yellow-light: #eab308;
+    --accent-yellow-dark: #a16207;
+    --accent-yellow-glow: rgba(202, 138, 4, 0.12);
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Theme utility classes */
+.theme-bg-main { background-color: var(--bg-dark); }
+.theme-bg-sidebar { background-color: var(--bg-sidebar); }
+.theme-bg-card { background-color: var(--bg-card); }
+.theme-bg-card-hover:hover { background-color: var(--bg-card-hover); }
+.theme-bg-input { background-color: var(--bg-input); }
+.theme-border { border-color: var(--border-subtle); }
+.theme-text-main { color: var(--text-primary); }
+.theme-text-muted { color: var(--text-secondary); }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}

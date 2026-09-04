@@ -43,12 +43,18 @@ async def check_underpricing(
     df = pd.DataFrame(transactions)
     df_market = pd.DataFrame(market_prices)
 
-    # Get recent transactions (last 30 days)
+    # Filter sales transactions
+    if "transaction_type" in df.columns:
+        df = df[df["transaction_type"].astype(str).str.lower().isin(["sale", "sales"])]
+
+    # Get recent transactions (last 30 days of data, or full dataset if historical)
     df["date"] = pd.to_datetime(df["date"], errors="coerce")
-    recent = df[df["date"] >= datetime.now() - timedelta(days=30)]
-    
+    max_date = df["date"].max()
+    if pd.isna(max_date):
+        max_date = datetime.now()
+    recent = df[df["date"] >= (max_date - timedelta(days=30))]
     if recent.empty:
-        return findings
+        recent = df
 
     # Compute average selling price per item
     avg_prices = (
@@ -57,22 +63,32 @@ async def check_underpricing(
         .reset_index()
     )
     avg_prices.columns = ["item_name", "avg_price", "txn_count"]
-    avg_prices = avg_prices[avg_prices["txn_count"] >= 3]  # need at least 3 transactions
+    avg_prices = avg_prices[avg_prices["txn_count"] >= 1]  # allow items with recorded sales
 
     for _, row in avg_prices.iterrows():
         item = row["item_name"].lower().strip()
         user_price = row["avg_price"]
+        tokens = set(item.split())
 
-        # Find matching market price
-        market_match = df_market[
-            df_market["commodity"].str.lower().str.contains(item[:4], na=False) |
-            df_market["commodity"].str.lower().str.contains(item.split()[0] if item else "x", na=False)
-        ]
+        # Match benchmark market price by token overlap or substring
+        def score_match(comm_name):
+            comm_lower = str(comm_name).lower()
+            comm_tokens = set(comm_lower.split())
+            overlap = len(tokens.intersection(comm_tokens))
+            if overlap > 0:
+                return overlap * 10
+            if item[:4] in comm_lower or comm_lower[:4] in item:
+                return 5
+            return 0
+
+        df_market["match_score"] = df_market["commodity"].apply(score_match)
+        market_match = df_market[df_market["match_score"] > 0].sort_values("match_score", ascending=False)
+        
         if market_match.empty:
             continue
 
-        market_price = market_match["modal_price"].iloc[0]
-        market_name = market_match.get("market_name", pd.Series(["regional market"])).iloc[0]
+        market_price = float(market_match["modal_price"].iloc[0])
+        market_name = market_match.get("market_name", pd.Series(["Regional Wholesale Mandi"])).iloc[0]
 
         if market_price <= 0 or user_price <= 0:
             continue
@@ -191,10 +207,11 @@ async def check_sales_anomaly(transactions: list[dict]) -> list[dict]:
 
     df = pd.DataFrame(transactions)
     df["date"] = pd.to_datetime(df["date"], errors="coerce")
-    df = df[df["transaction_type"] == "sale"]
+    if "transaction_type" in df.columns:
+        df = df[df["transaction_type"].astype(str).str.lower().isin(["sale", "sales"])]
     df = df.dropna(subset=["date", "total_amount"])
 
-    if len(df) < 14:  # Need at least 2 weeks of data
+    if len(df) < 5:  # Need at least 5 transactions
         return findings
 
     # Aggregate daily sales

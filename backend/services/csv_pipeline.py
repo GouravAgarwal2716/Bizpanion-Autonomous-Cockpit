@@ -46,7 +46,10 @@ CATEGORY_INFER_RULES = {
     r"(onion|tomato|potato|carrot|garlic|ginger|spinach|cabbage|cauliflower|brinjal|bean|pea|chilli|coriander|mint|vegetable|sabzi|bhaji)": "vegetables",
     r"(rice|wheat|dal|pulse|lentil|maize|jowar|bajra|grain|flour|atta|besan|maida|चावल|गेहूं|दाल)": "grains_pulses",
     r"(milk|curd|paneer|ghee|butter|cheese|dairy|दूध|पनीर|மோர்)": "dairy",
-    r"(oil|soap|detergent|shampoo|toothpaste|cosmetic|personal care)": "fmcg",
+    r"(saree|shirt|cotton|silk|fabric|garment|kurti|denim|jeans|tshirt|cloth|textile|linen|suit|dress|shorts)": "textiles",
+    r"(mobile|phone|charger|cable|earphones|screen|battery|laptop|repair|switch|board|bulb|wire|electronics)": "electronics",
+    r"(cement|steel|paint|pipe|rod|iron|hardware|tool|screw|nail|hammer|wrench|plywood)": "hardware",
+    r"(oil|soap|detergent|shampoo|toothpaste|cosmetic|personal care|biscuit|tea|coffee|snack|fmcg|kirana)": "fmcg",
     r"(sugar|jaggery|salt|spice|masala|turmeric|cumin|pepper|chana|namak|गुड़)": "spices_staples",
     r"(expense|rent|electricity|water|labour|transport|miscellaneous|खर्च)": "expenses",
 }
@@ -197,10 +200,15 @@ def run_pipeline(
         if "quantity" in df.columns and "total_amount" in df.columns:
             df["selling_price_per_unit"] = df["total_amount"] / df["quantity"].replace(0, np.nan)
 
-    # Default transaction type
+    # Default transaction type and canonical normalization
     if "transaction_type" not in df.columns:
         df["transaction_type"] = "sale"
-    df["transaction_type"] = df["transaction_type"].fillna("sale").str.lower().str.strip()
+    else:
+        df["transaction_type"] = df["transaction_type"].fillna("sale").astype(str).str.lower().str.strip()
+        df["transaction_type"] = df["transaction_type"].apply(
+            lambda x: "sale" if x in ["sales", "sale", "sell", "sold", "credit", "income", "bill", "invoice", "cr"]
+            else ("expense" if x in ["expense", "expenses", "purchase", "purchases", "buy", "debit", "cost", "dr"] else x)
+        )
 
     yield PipelineStep(
         step="clean", status="done",

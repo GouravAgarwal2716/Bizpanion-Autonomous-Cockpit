@@ -1,0 +1,121 @@
+date,item_name,category,quantity,unit,selling_price_per_unit,total_amount,transaction_type
+2026-07-21 09:29:00,Tata Tea Premium 500g,groceries,1,box,273,273,sales
+2026-07-22 04:53:00,Basmati Rice 5kg,groceries,3,bag,438,1314,sales
+2026-07-22 05:56:00,Sugar M-Grade 1kg,groceries,11,kg,47,517,sales
+2026-07-22 10:07:00,Aashirvaad Atta 5kg,groceries,2,bag,260,520,sales
+2026-07-22 11:46:00,Toor Dal 1kg,groceries,8,kg,135,1080,purchase
+2026-07-23 04:09:00,Toor Dal 1kg,groceries,3,kg,161,483,sales
+2026-07-23 05:41:00,MDH Garam Masala 100g,groceries,8,box,96,768,sales
+2026-07-24 07:35:00,Basmati Rice 5kg,groceries,1,bag,438,438,sales
+2026-07-24 08:35:00,MDH Garam Masala 100g,groceries,12,box,82,984,purchase
+2026-07-24 09:52:00,MDH Garam Masala 100g,groceries,4,box,99,396,sales
+2026-07-24 10:32:00,Basmati Rice 5kg,groceries,2,bag,439,878,sales
+2026-07-25 11:28:00,MDH Garam Masala 100g,groceries,8,box,96,768,sales
+2026-07-25 11:50:00,MDH Garam Masala 100g,groceries,5,box,100,500,sales
+2026-07-25 12:43:00,MDH Garam Masala 100g,groceries,16,box,82,1312,purchase
+2026-07-25 14:59:00,Maggi 70g Noodles,groceries,14,packet,17,238,sales
+2026-07-26 03:19:00,Basmati Rice 5kg,groceries,24,bag,380,9120,purchase
+2026-07-26 07:59:00,Tata Tea Premium 500g,groceries,1,box,273,273,sales
+2026-07-26 14:34:00,Sugar M-Grade 1kg,groceries,8,kg,44,352,sales
+2026-07-27 03:53:00,Sugar M-Grade 1kg,groceries,8,kg,46,368,sales
+2026-07-27 08:27:00,Maggi 70g Noodles,groceries,37,packet,12,444,sales
+2026-07-28 04:07:00,Toor Dal 1kg,groceries,48,kg,135,6480,purchase
+2026-07-28 04:59:00,Sugar M-Grade 1kg,groceries,3,kg,44,132,sales
+2026-07-29 11:35:00,Basmati Rice 5kg,groceries,3,bag,440,1320,sales
+2026-07-30 03:45:00,MDH Garam Masala 100g,groceries,5,box,99,495,sales
+2026-07-30 07:44:00,Sugar M-Grade 1kg,groceries,12,kg,45,540,sales
+2026-07-30 11:07:00,Sugar M-Grade 1kg,groceries,8,kg,46,368,sales
+2026-07-30 13:33:00,Tata Salt 1kg,groceries,27,pouch,22,594,purchase
+2026-07-31 03:01:00,Basmati Rice 5kg,groceries,3,bag,441,1323,sales
+2026-07-31 03:30:00,MDH Garam Masala 100g,groceries,7,box,100,700,sales
+2026-07-31 08:34:00,Aashirvaad Atta 5kg,groceries,5,bag,261,1305,sales
+2026-08-01 03:26:00,Toor Dal 1kg,groceries,3,kg,163,489,sales
+2026-08-03 14:12:00,Basmati Rice 5kg,groceries,2,bag,443,886,sales
+2026-08-04 05:53:00,Sugar M-Grade 1kg,groceries,10,kg,47,470,sales
+2026-08-04 06:06:00,Fortune Sunflower Oil 1L,groceries,12,pouch,144,1728,sales
+2026-08-04 07:50:00,Maggi 70g Noodles,groceries,29,packet,15,435,sales
+2026-08-05 12:05:00,Fortune Sunflower Oil 1L,groceries,11,pouch,143,1573,sales
+2026-08-05 13:09:00,MDH Garam Masala 100g,groceries,6,box,100,600,sales
+2026-08-06 08:17:00,Toor Dal 1kg,groceries,4,kg,163,652,sales
+2026-08-06 12:12:00,MDH Garam Masala 100g,groceries,7,box,99,693,sales
+2026-08-07 04:14:00,Basmati Rice 5kg,groceries,4,bag,439,1756,sales
+2026-08-07 05:37:00,Fortune Sunflower Oil 1L,groceries,8,pouch,143,1144,sales
+2026-08-07 07:32:00,Tata Salt 1kg,groceries,11,pouch,29,319,sales
+2026-08-07 10:43:00,Tata Salt 1kg,groceries,9,pouch,26,234,sales
+2026-08-07 12:49:00,Basmati Rice 5kg,groceries,2,bag,438,876,sales
+2026-08-08 06:13:00,Tata Salt 1kg,groceries,7,pouch,27,189,sales
+2026-08-08 08:05:00,Aashirvaad Atta 5kg,groceries,7,bag,258,1806,sales
+2026-08-08 08:54:00,Tata Tea Premium 500g,groceries,4,box,278,1112,sales
+2026-08-08 11:07:00,Fortune Sunflower Oil 1L,groceries,11,pouch,143,1573,sales
+2026-08-08 12:54:00,Fortune Sunflower Oil 1L,groceries,8,pouch,146,1168,sales
+2026-08-09 11:56:00,Toor Dal 1kg,groceries,7,kg,159,1113,sales
+2026-08-10 04:51:00,Toor Dal 1kg,groceries,40,kg,135,5400,purchase
+2026-08-10 06:48:00,Maggi 70g Noodles,groceries,69,packet,11,759,purchase
+2026-08-11 11:50:00,MDH Garam Masala 100g,groceries,7,box,98,686,sales
+2026-08-11 12:52:00,Basmati Rice 5kg,groceries,1,bag,438,438,sales
+2026-08-11 13:37:00,Surf Excel 1kg,groceries,4,pouch,141,564,sales
+2026-08-12 04:10:00,Surf Excel 1kg,groceries,6,pouch,136,816,sales
+2026-08-12 12:17:00,Toor Dal 1kg,groceries,7,kg,162,1134,sales
+2026-08-12 12:19:00,Fortune Sunflower Oil 1L,groceries,3,pouch,143,429,sales
+2026-08-13 05:17:00,Tata Tea Premium 500g,groceries,4,box,274,1096,sales
+2026-08-13 06:40:00,Fortune Sunflower Oil 1L,groceries,7,pouch,147,1029,sales
+2026-08-13 11:05:00,Fortune Sunflower Oil 1L,groceries,7,pouch,145,1015,sales
+2026-08-13 15:29:00,Surf Excel 1kg,groceries,3,pouch,138,414,sales
+2026-08-14 03:03:00,MDH Garam Masala 100g,groceries,7,box,100,700,sales
+2026-08-14 12:31:00,Surf Excel 1kg,groceries,5,pouch,138,690,sales
+2026-08-14 15:57:00,Sugar M-Grade 1kg,groceries,11,kg,43,473,sales
+2026-08-15 03:05:00,Toor Dal 1kg,groceries,5,kg,161,805,sales
+2026-08-15 03:36:00,Tata Tea Premium 500g,groceries,5,box,277,1385,sales
+2026-08-15 05:28:00,Sugar M-Grade 1kg,groceries,8,kg,43,344,sales
+2026-08-15 05:34:00,Surf Excel 1kg,groceries,4,pouch,140,560,sales
+2026-08-16 09:50:00,MDH Garam Masala 100g,groceries,56,box,82,4592,purchase
+2026-08-17 03:05:00,Aashirvaad Atta 5kg,groceries,3,bag,263,789,sales
+2026-08-17 10:06:00,Toor Dal 1kg,groceries,3,kg,160,480,sales
+2026-08-17 10:40:00,Basmati Rice 5kg,groceries,8,bag,380,3040,purchase
+2026-08-17 11:22:00,Toor Dal 1kg,groceries,5,kg,163,815,sales
+2026-08-18 03:37:00,Tata Salt 1kg,groceries,15,pouch,31,465,sales
+2026-08-18 03:45:00,Maggi 70g Noodles,groceries,26,packet,15,390,sales
+2026-08-18 07:12:00,Tata Salt 1kg,groceries,5,pouch,31,155,sales
+2026-08-18 10:43:00,Sugar M-Grade 1kg,groceries,7,kg,46,322,sales
+2026-08-18 13:23:00,Maggi 70g Noodles,groceries,174,packet,11,1914,purchase
+2026-08-19 09:53:00,Sugar M-Grade 1kg,groceries,12,kg,42,504,sales
+2026-08-19 12:07:00,Aashirvaad Atta 5kg,groceries,3,bag,259,777,sales
+2026-08-19 13:31:00,Tata Tea Premium 500g,groceries,5,box,274,1370,sales
+2026-08-20 08:46:00,Maggi 70g Noodles,groceries,10,packet,15,150,sales
+2026-08-21 05:15:00,Surf Excel 1kg,groceries,5,pouch,137,685,sales
+2026-08-21 07:12:00,Toor Dal 1kg,groceries,8,kg,163,1304,sales
+2026-08-21 07:44:00,Tata Salt 1kg,groceries,5,pouch,27,135,sales
+2026-08-21 09:10:00,Sugar M-Grade 1kg,groceries,8,kg,45,360,sales
+2026-08-22 04:19:00,Basmati Rice 5kg,groceries,4,bag,442,1768,sales
+2026-08-22 04:56:00,Aashirvaad Atta 5kg,groceries,8,bag,260,2080,sales
+2026-08-22 11:47:00,Aashirvaad Atta 5kg,groceries,6,bag,258,1548,sales
+2026-08-22 12:26:00,MDH Garam Masala 100g,groceries,15,box,82,1230,purchase
+2026-08-23 09:59:00,Tata Salt 1kg,groceries,9,pouch,29,261,sales
+2026-08-24 09:29:00,MDH Garam Masala 100g,groceries,5,box,96,480,sales
+2026-08-24 10:00:00,Tata Tea Premium 500g,groceries,4,box,275,1100,sales
+2026-08-25 05:50:00,Tata Tea Premium 500g,groceries,4,box,276,1104,sales
+2026-08-25 09:49:00,Basmati Rice 5kg,groceries,3,bag,442,1326,sales
+2026-08-26 04:01:00,Sugar M-Grade 1kg,groceries,6,kg,45,270,sales
+2026-08-26 12:34:00,Tata Tea Premium 500g,groceries,2,box,277,554,sales
+2026-08-27 03:08:00,Tata Salt 1kg,groceries,5,pouch,30,150,sales
+2026-08-28 05:13:00,Basmati Rice 5kg,groceries,12,bag,380,4560,purchase
+2026-08-28 13:44:00,Fortune Sunflower Oil 1L,groceries,11,pouch,144,1584,sales
+2026-08-29 05:33:00,Maggi 70g Noodles,groceries,80,packet,11,880,purchase
+2026-08-29 09:54:00,Surf Excel 1kg,groceries,6,pouch,138,828,sales
+2026-08-29 11:28:00,Sugar M-Grade 1kg,groceries,15,kg,43,645,sales
+2026-08-29 12:05:00,Fortune Sunflower Oil 1L,groceries,10,pouch,148,1480,sales
+2026-08-30 07:45:00,Maggi 70g Noodles,groceries,16,packet,16,256,sales
+2026-08-30 10:59:00,Sugar M-Grade 1kg,groceries,12,kg,43,516,sales
+2026-08-31 05:26:00,Aashirvaad Atta 5kg,groceries,8,bag,259,2072,sales
+2026-08-31 07:55:00,Tata Salt 1kg,groceries,40,pouch,22,880,purchase
+2026-08-31 09:14:00,Surf Excel 1kg,groceries,2,pouch,137,274,sales
+2026-08-31 12:04:00,Sugar M-Grade 1kg,groceries,4,kg,47,188,sales
+2026-09-01 04:31:00,Basmati Rice 5kg,groceries,12,bag,380,4560,purchase
+2026-09-01 08:46:00,Toor Dal 1kg,groceries,9,kg,160,1440,sales
+2026-09-02 11:24:00,Tata Tea Premium 500g,groceries,2,box,273,546,sales
+2026-09-02 14:01:00,Surf Excel 1kg,groceries,4,pouch,137,548,sales
+2026-09-02 14:47:00,Toor Dal 1kg,groceries,2,kg,162,324,sales
+2026-09-03 07:48:00,Fortune Sunflower Oil 1L,groceries,9,pouch,146,1314,sales
+2026-09-03 08:21:00,Sugar M-Grade 1kg,groceries,4,kg,46,184,sales
+2026-09-03 14:15:00,Aashirvaad Atta 5kg,groceries,2,bag,260,520,sales
+2026-09-03 14:56:00,Tata Salt 1kg,groceries,9,pouch,30,270,sales

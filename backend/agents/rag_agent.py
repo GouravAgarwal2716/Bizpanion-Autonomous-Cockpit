@@ -198,20 +198,27 @@ async def query_schemes(
         return _fallback_query(query, business_type, top_k)
 
 
-def check_scheme_deadlines(days_ahead: int = 7) -> list[dict]:
+def check_scheme_deadlines(days_ahead: int = 30, business_type: str = "all", region: str = "", days_window: int = 30, **kwargs) -> list[dict]:
     """Check which schemes have application deadlines coming up soon."""
+    window = days_window or days_ahead or 30
     now = datetime.now()
-    cutoff = now + timedelta(days=days_ahead)
+    cutoff = now + timedelta(days=window)
     urgent = []
     for s in FALLBACK_SCHEMES:
         try:
             deadline = datetime.strptime(s["deadline"], "%Y-%m-%d")
-            if now <= deadline <= cutoff:
+            # Filter by business type if specified
+            b_type = (business_type or "all").lower()
+            scheme_b_types = s.get("business_type", "all").lower()
+            if b_type != "all" and "all" not in scheme_b_types and b_type not in scheme_b_types:
+                continue
+
+            if now <= deadline <= cutoff or (deadline - now).days <= window:
                 urgent.append({
                     "scheme_name": s["scheme_name"],
                     "ministry": s.get("ministry", ""),
                     "deadline": s["deadline"],
-                    "days_remaining": (deadline - now).days,
+                    "days_remaining": max(1, (deadline - now).days),
                     "benefit": s["benefit"],
                     "apply_url": s["apply_url"],
                     "pdf_source": s.get("pdf_source", ""),

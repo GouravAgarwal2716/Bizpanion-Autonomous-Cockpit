@@ -179,7 +179,7 @@ async def check_tally_connection(req: TallySyncRequest):
     <BODY><EXPORTDATA><REQUESTDESC><REPORTNAME>List of Companies</REPORTNAME></REQUESTDESC></EXPORTDATA></BODY></ENVELOPE>"""
     try:
         response = await call_tally(ping_xml, req.tally_url)
-        if "<ENVELOPE>" in response:
+        if "<ENVELOPE>" in response or "<RESPONSE>" in response or "<BODY>" in response:
             return {"status": "connected", "message": "Tally Prime is running"}
         return {"status": "error", "message": "Unexpected response from Tally"}
     except Exception as e:
@@ -287,3 +287,108 @@ async def import_tally_xml(
         results["inventory"] = len(inventory_items)
 
     return {"status": "success", **results}
+
+
+@router.post("/simulate-sync")
+async def simulate_tally_sync(req: TallySyncRequest):
+    """
+    Simulate live Tally Prime 9000 DayBook XML sync for live demonstration.
+    Generates authentic Tally XML envelopes, parses vouchers and stock, and writes to database.
+    """
+    import uuid as _uuid
+    import pandas as pd
+    from datetime import datetime, timedelta
+
+    # Authentic Tally DayBook XML payload
+    profile = await db.get_business_profile(req.business_id) or {}
+    biz_type = profile.get("business_type", "kirana").lower()
+
+    items_by_sector = {
+        "kirana": [("Aashirvaad Atta 5kg", 250, 10), ("Tata Salt 1kg", 28, 25), ("Fortune Oil 1L", 140, 15), ("Toor Dal 1kg", 155, 12)],
+        "dairy": [("Buffalo Fresh Milk 1L", 65, 40), ("Malai Paneer 1kg", 360, 8), ("Desi Cow Ghee 1L", 620, 4)],
+        "textile": [("Cotton Printed Saree", 550, 6), ("Men Denim Jeans", 750, 8), ("Rayon Kurti", 380, 10)],
+        "hardware": [("TMT Steel Rebar 12mm", 62, 80), ("Havells Copper Wire 90m", 2100, 3), ("UltraTech Cement Bag", 380, 20)],
+        "vegetables": [("Hybrid Red Tomatoes", 26, 35), ("Agra Potatoes", 22, 50), ("Nashik Onions", 30, 45)],
+    }
+
+    selected_items = items_by_sector.get(biz_type, items_by_sector["kirana"])
+    
+    simulated_vouchers = []
+    xml_voucher_blocks = []
+
+    for i in range(1, 21):
+        v_date = datetime.now() - timedelta(days=i % 12, hours=i*2)
+        date_str = v_date.strftime("%Y%m%d")
+        v_num = f"SALES/26-27/{1000 + i}"
+        item, rate, qty = selected_items[i % len(selected_items)]
+        amt = rate * qty
+        party = f"Customer #{100 + (i % 7)}"
+
+        simulated_vouchers.append({
+            "id": str(_uuid.uuid4()),
+            "business_id": req.business_id,
+            "date": v_date.isoformat(),
+            "item_name": item,
+            "category": biz_type,
+            "quantity": qty,
+            "unit": "unit",
+            "selling_price_per_unit": rate,
+            "total_amount": amt,
+            "transaction_type": "sales",
+            "source": "tally",
+            "flagged": False,
+        })
+
+        xml_voucher_blocks.append(f"""    <VOUCHER VCHTYPE="Sales" ACTION="Create">
+      <DATE>{date_str}</DATE>
+      <VOUCHERNUMBER>{v_num}</VOUCHERNUMBER>
+      <VOUCHERTYPENAME>Sales</VOUCHERTYPENAME>
+      <PARTYLEDGERNAME>{party}</PARTYLEDGERNAME>
+      <INVENTORYENTRIES.LIST>
+        <STOCKITEMNAME>{item}</STOCKITEMNAME>
+        <ACTUALQTY>{qty} Nos</ACTUALQTY>
+        <RATE>{rate:.2f}/Nos</RATE>
+        <AMOUNT>{amt:.2f}</AMOUNT>
+      </INVENTORYENTRIES.LIST>
+    </VOUCHER>""")
+
+    xml_request_envelope = make_voucher_request(
+        (datetime.now() - timedelta(days=30)).strftime("%Y%m%d"),
+        datetime.now().strftime("%Y%m%d"),
+        profile.get("business_name", "Primary Company")
+    )
+
+    xml_response_envelope = f"""<ENVELOPE>
+  <HEADER><TALLYRESULT>Success</TALLYRESULT></HEADER>
+  <BODY>
+    <DATA>
+      <COLLECTION>
+{chr(10).join(xml_voucher_blocks[:4])}
+        <!-- ... and {len(simulated_vouchers) - 4} more vouchers synchronized -->
+      </COLLECTION>
+    </DATA>
+  </BODY>
+</ENVELOPE>"""
+
+    # Save to Supabase
+    saved_count = await db.insert_transactions(simulated_vouchers)
+
+    # Run agent pipeline
+    agent_res = {}
+    try:
+        agent_res = await run_agent_pipeline(req.business_id, trigger="tally_simulate")
+    except Exception as e:
+        logger.warning(f"Pipeline error in tally simulate: {e}")
+
+    return {
+        "status": "connected",
+        "tally_url": "http://localhost:9000",
+        "company_name": profile.get("business_name", "Primary Company"),
+        "vouchers_imported": saved_count,
+        "sample_vouchers": simulated_vouchers[:5],
+        "xml_request": xml_request_envelope,
+        "xml_response": xml_response_envelope,
+        "alerts_generated": agent_res.get("alerts_generated", 0),
+        "whatsapp_sent": agent_res.get("whatsapp_sent", 0),
+        "timestamp": datetime.now().isoformat(),
+    }

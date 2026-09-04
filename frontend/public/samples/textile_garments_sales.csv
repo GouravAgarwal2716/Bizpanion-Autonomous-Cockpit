@@ -1,0 +1,121 @@
+date,item_name,category,quantity,unit,selling_price_per_unit,total_amount,transaction_type
+2026-07-21 05:59:00,Kids Denim Shorts,textile,6,piece,322,1932,sales
+2026-07-21 08:38:00,Kids Denim Shorts,textile,28,piece,210,5880,purchase
+2026-07-22 03:32:00,Pure Cotton Printed Saree,textile,16,piece,420,6720,purchase
+2026-07-23 09:28:00,Cotton Bed Sheet Double,textile,12,set,390,4680,purchase
+2026-07-23 11:41:00,Kids Denim Shorts,textile,5,piece,319,1595,sales
+2026-07-24 11:15:00,Formal Cotton Shirt,textile,20,piece,360,7200,purchase
+2026-07-24 13:58:00,Silk Jacquard Fabric,textile,19,metre,262,4978,sales
+2026-07-24 14:49:00,Kids Denim Shorts,textile,6,piece,322,1932,sales
+2026-07-25 09:37:00,Women Rayon Kurti,textile,8,piece,418,3344,sales
+2026-07-25 15:29:00,Women Rayon Kurti,textile,7,piece,421,2947,sales
+2026-07-26 09:45:00,Formal Cotton Shirt,textile,6,piece,523,3138,sales
+2026-07-26 11:12:00,Kids Denim Shorts,textile,3,piece,320,960,sales
+2026-07-26 15:03:00,Men Stretch Denim Jeans,textile,12,piece,550,6600,purchase
+2026-07-27 05:17:00,Kids Denim Shorts,textile,2,piece,318,636,sales
+2026-07-27 07:36:00,Kids Denim Shorts,textile,2,piece,321,642,sales
+2026-07-27 13:26:00,Women Rayon Kurti,textile,4,piece,420,1680,sales
+2026-07-27 13:39:00,Men Stretch Denim Jeans,textile,3,piece,780,2340,sales
+2026-07-27 13:40:00,Cotton Bed Sheet Double,textile,3,set,561,1683,sales
+2026-07-29 05:12:00,Silk Jacquard Fabric,textile,17,metre,261,4437,sales
+2026-07-29 05:48:00,Cotton Bed Sheet Double,textile,2,set,558,1116,sales
+2026-07-29 12:26:00,Pure Cotton Printed Saree,textile,2,piece,581,1162,sales
+2026-07-30 04:22:00,Polyester Lining Fabric,textile,76,metre,38,2888,purchase
+2026-07-30 04:43:00,Formal Cotton Shirt,textile,49,piece,360,17640,purchase
+2026-07-30 13:34:00,Kids Denim Shorts,textile,3,piece,320,960,sales
+2026-07-31 11:03:00,Women Rayon Kurti,textile,5,piece,420,2100,sales
+2026-07-31 14:28:00,Formal Cotton Shirt,textile,6,piece,519,3114,sales
+2026-08-01 06:50:00,Cotton Bed Sheet Double,textile,3,set,561,1683,sales
+2026-08-01 07:28:00,Pure Cotton Printed Saree,textile,4,piece,578,2312,sales
+2026-08-01 09:11:00,Polyester Lining Fabric,textile,12,metre,54,648,sales
+2026-08-01 11:09:00,Men Stretch Denim Jeans,textile,2,piece,781,1562,sales
+2026-08-01 14:42:00,Men Stretch Denim Jeans,textile,4,piece,781,3124,sales
+2026-08-01 15:18:00,Cotton Bed Sheet Double,textile,2,set,562,1124,sales
+2026-08-02 07:34:00,Formal Cotton Shirt,textile,6,piece,519,3114,sales
+2026-08-02 10:55:00,Polyester Lining Fabric,textile,15,metre,54,810,sales
+2026-08-02 12:53:00,Silk Jacquard Fabric,textile,12,metre,261,3132,sales
+2026-08-02 13:07:00,Polyester Lining Fabric,textile,156,metre,38,5928,purchase
+2026-08-02 13:40:00,Cotton Bed Sheet Double,textile,3,set,562,1686,sales
+2026-08-02 15:07:00,Men Stretch Denim Jeans,textile,4,piece,779,3116,sales
+2026-08-03 11:29:00,Pure Cotton Printed Saree,textile,28,piece,420,11760,purchase
+2026-08-03 12:53:00,Formal Cotton Shirt,textile,5,piece,519,2595,sales
+2026-08-04 12:37:00,Kids Denim Shorts,textile,4,piece,321,1284,sales
+2026-08-05 04:30:00,Formal Cotton Shirt,textile,2,piece,523,1046,sales
+2026-08-05 11:48:00,Men Stretch Denim Jeans,textile,7,piece,781,5467,sales
+2026-08-05 12:47:00,Cotton Bed Sheet Double,textile,18,set,390,7020,purchase
+2026-08-05 15:42:00,Silk Jacquard Fabric,textile,33,metre,180,5940,purchase
+2026-08-06 05:01:00,Cotton Bed Sheet Double,textile,3,set,559,1677,sales
+2026-08-06 05:44:00,Kids Denim Shorts,textile,6,piece,320,1920,sales
+2026-08-06 09:39:00,Formal Cotton Shirt,textile,5,piece,520,2600,sales
+2026-08-06 10:01:00,Pure Cotton Printed Saree,textile,4,piece,582,2328,sales
+2026-08-06 14:09:00,Cotton Bed Sheet Double,textile,1,set,562,562,sales
+2026-08-06 14:09:00,Cotton Bed Sheet Double,textile,1,set,562,562,sales
+2026-08-06 14:30:00,Kids Denim Shorts,textile,4,piece,322,1288,sales
+2026-08-06 15:34:00,Cotton Bed Sheet Double,textile,2,set,561,1122,sales
+2026-08-07 11:20:00,Pure Cotton Printed Saree,textile,36,piece,420,15120,purchase
+2026-08-07 13:04:00,Women Rayon Kurti,textile,9,piece,420,3780,sales
+2026-08-08 03:39:00,Pure Cotton Printed Saree,textile,6,piece,580,3480,sales
+2026-08-08 10:15:00,Kids Denim Shorts,textile,9,piece,210,1890,purchase
+2026-08-08 13:18:00,Men Stretch Denim Jeans,textile,4,piece,778,3112,sales
+2026-08-09 10:19:00,Women Rayon Kurti,textile,4,piece,418,1672,sales
+2026-08-10 07:32:00,Women Rayon Kurti,textile,4,piece,419,1676,sales
+2026-08-10 10:49:00,Kids Denim Shorts,textile,4,piece,322,1288,sales
+2026-08-10 13:50:00,Formal Cotton Shirt,textile,6,piece,519,3114,sales
+2026-08-11 07:09:00,Formal Cotton Shirt,textile,3,piece,522,1566,sales
+2026-08-11 10:32:00,Men Stretch Denim Jeans,textile,6,piece,780,4680,sales
+2026-08-11 10:36:00,Pure Cotton Printed Saree,textile,6,piece,581,3486,sales
+2026-08-11 12:36:00,Men Stretch Denim Jeans,textile,2,piece,780,1560,sales
+2026-08-12 05:11:00,Women Rayon Kurti,textile,6,piece,419,2514,sales
+2026-08-12 12:14:00,Men Stretch Denim Jeans,textile,7,piece,780,5460,sales
+2026-08-13 07:07:00,Kids Denim Shorts,textile,4,piece,321,1284,sales
+2026-08-13 11:53:00,Cotton Bed Sheet Double,textile,4,set,563,2252,sales
+2026-08-14 05:56:00,Kids Denim Shorts,textile,6,piece,320,1920,sales
+2026-08-14 11:19:00,Pure Cotton Printed Saree,textile,1,piece,583,583,sales
+2026-08-14 11:28:00,Polyester Lining Fabric,textile,27,metre,56,1512,sales
+2026-08-14 12:12:00,Formal Cotton Shirt,textile,6,piece,521,3126,sales
+2026-08-15 05:16:00,Polyester Lining Fabric,textile,96,metre,38,3648,purchase
+2026-08-15 07:36:00,Cotton Bed Sheet Double,textile,1,set,563,563,sales
+2026-08-15 14:57:00,Silk Jacquard Fabric,textile,19,metre,258,4902,sales
+2026-08-16 08:16:00,Formal Cotton Shirt,textile,5,piece,521,2605,sales
+2026-08-16 08:19:00,Kids Denim Shorts,textile,3,piece,322,966,sales
+2026-08-16 16:00:00,Women Rayon Kurti,textile,4,piece,420,1680,sales
+2026-08-17 07:41:00,Silk Jacquard Fabric,textile,14,metre,260,3640,sales
+2026-08-17 08:45:00,Formal Cotton Shirt,textile,24,piece,360,8640,purchase
+2026-08-17 11:53:00,Polyester Lining Fabric,textile,22,metre,55,1210,sales
+2026-08-18 04:32:00,Silk Jacquard Fabric,textile,14,metre,263,3682,sales
+2026-08-18 12:20:00,Women Rayon Kurti,textile,49,piece,280,13720,purchase
+2026-08-18 15:12:00,Silk Jacquard Fabric,textile,6,metre,263,1578,sales
+2026-08-18 15:19:00,Kids Denim Shorts,textile,6,piece,318,1908,sales
+2026-08-19 03:09:00,Polyester Lining Fabric,textile,12,metre,58,696,sales
+2026-08-19 12:57:00,Silk Jacquard Fabric,textile,6,metre,258,1548,sales
+2026-08-20 04:57:00,Kids Denim Shorts,textile,6,piece,321,1926,sales
+2026-08-21 04:15:00,Kids Denim Shorts,textile,4,piece,322,1288,sales
+2026-08-21 09:28:00,Kids Denim Shorts,textile,2,piece,323,646,sales
+2026-08-21 10:11:00,Kids Denim Shorts,textile,3,piece,319,957,sales
+2026-08-22 06:28:00,Polyester Lining Fabric,textile,11,metre,53,583,sales
+2026-08-22 15:32:00,Cotton Bed Sheet Double,textile,4,set,563,2252,sales
+2026-08-23 08:27:00,Polyester Lining Fabric,textile,13,metre,55,715,sales
+2026-08-23 15:07:00,Polyester Lining Fabric,textile,15,metre,58,870,sales
+2026-08-24 05:21:00,Cotton Bed Sheet Double,textile,1,set,558,558,sales
+2026-08-24 10:01:00,Silk Jacquard Fabric,textile,14,metre,258,3612,sales
+2026-08-25 05:45:00,Pure Cotton Printed Saree,textile,6,piece,578,3468,sales
+2026-08-25 11:33:00,Pure Cotton Printed Saree,textile,2,piece,582,1164,sales
+2026-08-25 11:58:00,Women Rayon Kurti,textile,4,piece,420,1680,sales
+2026-08-26 03:25:00,Formal Cotton Shirt,textile,3,piece,521,1563,sales
+2026-08-26 03:37:00,Men Stretch Denim Jeans,textile,5,piece,778,3890,sales
+2026-08-26 04:39:00,Kids Denim Shorts,textile,3,piece,322,966,sales
+2026-08-26 07:47:00,Cotton Bed Sheet Double,textile,4,set,562,2248,sales
+2026-08-26 15:38:00,Cotton Bed Sheet Double,textile,2,set,563,1126,sales
+2026-08-27 08:22:00,Pure Cotton Printed Saree,textile,5,piece,579,2895,sales
+2026-08-28 04:19:00,Cotton Bed Sheet Double,textile,2,set,558,1116,sales
+2026-08-28 09:37:00,Cotton Bed Sheet Double,textile,3,set,559,1677,sales
+2026-08-29 14:41:00,Polyester Lining Fabric,textile,33,metre,56,1848,sales
+2026-08-29 15:19:00,Women Rayon Kurti,textile,9,piece,422,3798,sales
+2026-08-30 10:54:00,Polyester Lining Fabric,textile,33,metre,58,1914,sales
+2026-08-30 11:06:00,Men Stretch Denim Jeans,textile,6,piece,783,4698,sales
+2026-08-31 10:07:00,Women Rayon Kurti,textile,28,piece,280,7840,purchase
+2026-08-31 10:28:00,Men Stretch Denim Jeans,textile,5,piece,778,3890,sales
+2026-08-31 13:32:00,Polyester Lining Fabric,textile,16,metre,55,880,sales
+2026-09-01 09:57:00,Silk Jacquard Fabric,textile,14,metre,258,3612,sales
+2026-09-02 10:25:00,Cotton Bed Sheet Double,textile,2,set,562,1124,sales
+2026-09-02 10:39:00,Men Stretch Denim Jeans,textile,6,piece,780,4680,sales

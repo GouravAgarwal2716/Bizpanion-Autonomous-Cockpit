@@ -1,0 +1,121 @@
+date,item_name,category,quantity,unit,selling_price_per_unit,total_amount,transaction_type
+2026-07-21 03:46:00,Green Peas / Matar,vegetables,15,kg,63,945,sales
+2026-07-21 06:58:00,Fresh Green Chillies,vegetables,7,kg,54,378,sales
+2026-07-21 10:02:00,Hybrid Red Tomatoes,vegetables,32,kg,28,896,sales
+2026-07-21 13:30:00,Cold-Storage Agra Potato,vegetables,20,kg,25,500,sales
+2026-07-22 05:19:00,Cold-Storage Agra Potato,vegetables,31,kg,20,620,sales
+2026-07-22 08:24:00,Fresh Green Chillies,vegetables,3,kg,56,168,sales
+2026-07-22 09:00:00,Hybrid Red Tomatoes,vegetables,17,kg,27,459,sales
+2026-07-22 09:29:00,Nashik Red Onion,vegetables,29,kg,35,1015,sales
+2026-07-22 09:48:00,Nashik Red Onion,vegetables,28,kg,32,896,sales
+2026-07-22 15:49:00,Fresh Green Chillies,vegetables,2,kg,56,112,sales
+2026-07-23 04:38:00,Cold-Storage Agra Potato,vegetables,40,kg,21,840,sales
+2026-07-23 05:14:00,Lady Finger / Bhindi,vegetables,7,kg,41,287,sales
+2026-07-23 12:43:00,Hybrid Red Tomatoes,vegetables,24,kg,28,672,sales
+2026-07-23 14:55:00,Lady Finger / Bhindi,vegetables,9,kg,44,396,sales
+2026-07-24 03:17:00,Fresh Green Chillies,vegetables,3,kg,53,159,sales
+2026-07-25 03:07:00,Cold-Storage Agra Potato,vegetables,42,kg,25,1050,sales
+2026-07-25 07:26:00,Nashik Red Onion,vegetables,31,kg,30,930,sales
+2026-07-26 05:50:00,Fresh Ginger / Adrak,vegetables,2,kg,113,226,sales
+2026-07-26 06:21:00,Fresh Green Chillies,vegetables,9,kg,56,504,sales
+2026-07-26 06:57:00,Fresh Cauliflower,vegetables,10,piece,26,260,sales
+2026-07-27 06:03:00,Fresh Ginger / Adrak,vegetables,4,kg,113,452,sales
+2026-07-27 11:11:00,Hybrid Red Tomatoes,vegetables,29,kg,25,725,sales
+2026-07-28 06:12:00,Cold-Storage Agra Potato,vegetables,51,kg,20,1020,sales
+2026-07-28 06:57:00,Green Peas / Matar,vegetables,6,kg,64,384,sales
+2026-07-28 14:28:00,Nashik Red Onion,vegetables,37,kg,30,1110,sales
+2026-07-28 14:51:00,Cold-Storage Agra Potato,vegetables,44,kg,22,968,sales
+2026-07-28 15:05:00,Cold-Storage Agra Potato,vegetables,44,kg,25,1100,sales
+2026-07-29 09:06:00,Hybrid Red Tomatoes,vegetables,30,kg,28,840,sales
+2026-07-29 13:24:00,Fresh Green Chillies,vegetables,9,kg,57,513,sales
+2026-07-30 03:02:00,Green Peas / Matar,vegetables,7,kg,66,462,sales
+2026-07-30 04:25:00,Fresh Green Chillies,vegetables,12,kg,38,456,purchase
+2026-07-30 06:52:00,Fresh Ginger / Adrak,vegetables,6,kg,108,648,sales
+2026-07-30 08:57:00,Cold-Storage Agra Potato,vegetables,23,kg,23,529,sales
+2026-08-01 03:08:00,Fresh Cauliflower,vegetables,9,piece,31,279,sales
+2026-08-01 03:34:00,Cold-Storage Agra Potato,vegetables,24,kg,24,576,sales
+2026-08-01 06:28:00,Fresh Green Chillies,vegetables,6,kg,58,348,sales
+2026-08-01 08:02:00,Hybrid Red Tomatoes,vegetables,49,kg,28,1372,sales
+2026-08-02 04:43:00,Lady Finger / Bhindi,vegetables,10,kg,42,420,sales
+2026-08-02 12:09:00,Nashik Red Onion,vegetables,37,kg,34,1258,sales
+2026-08-03 05:22:00,Cold-Storage Agra Potato,vegetables,15,kg,22,330,sales
+2026-08-03 09:38:00,Green Peas / Matar,vegetables,77,kg,45,3465,purchase
+2026-08-03 15:51:00,Fresh Cauliflower,vegetables,84,piece,18,1512,purchase
+2026-08-04 03:56:00,Hybrid Red Tomatoes,vegetables,10,kg,26,260,sales
+2026-08-04 07:38:00,Fresh Green Chillies,vegetables,3,kg,54,162,sales
+2026-08-05 11:46:00,Fresh Cauliflower,vegetables,9,piece,31,279,sales
+2026-08-05 15:33:00,Fresh Green Chillies,vegetables,4,kg,58,232,sales
+2026-08-07 11:27:00,Cold-Storage Agra Potato,vegetables,51,kg,25,1275,sales
+2026-08-07 12:29:00,Fresh Cauliflower,vegetables,14,piece,28,392,sales
+2026-08-07 14:42:00,Fresh Ginger / Adrak,vegetables,1,kg,109,109,sales
+2026-08-08 04:03:00,Lady Finger / Bhindi,vegetables,14,kg,40,560,sales
+2026-08-08 09:32:00,Cold-Storage Agra Potato,vegetables,20,kg,23,460,sales
+2026-08-08 14:26:00,Lady Finger / Bhindi,vegetables,6,kg,43,258,sales
+2026-08-09 08:29:00,Fresh Cauliflower,vegetables,68,piece,18,1224,purchase
+2026-08-09 08:59:00,Green Peas / Matar,vegetables,6,kg,65,390,sales
+2026-08-10 03:15:00,Lady Finger / Bhindi,vegetables,15,kg,43,645,sales
+2026-08-10 04:14:00,Fresh Cauliflower,vegetables,72,piece,18,1296,purchase
+2026-08-10 10:01:00,Nashik Red Onion,vegetables,49,kg,32,1568,sales
+2026-08-10 11:14:00,Fresh Cauliflower,vegetables,40,piece,18,720,purchase
+2026-08-11 09:37:00,Nashik Red Onion,vegetables,28,kg,33,924,sales
+2026-08-11 13:44:00,Cold-Storage Agra Potato,vegetables,58,kg,25,1450,sales
+2026-08-12 06:28:00,Lady Finger / Bhindi,vegetables,5,kg,40,200,sales
+2026-08-14 06:46:00,Hybrid Red Tomatoes,vegetables,27,kg,24,648,sales
+2026-08-14 10:32:00,Fresh Cauliflower,vegetables,11,piece,27,297,sales
+2026-08-14 11:08:00,Cold-Storage Agra Potato,vegetables,22,kg,24,528,sales
+2026-08-14 13:15:00,Lady Finger / Bhindi,vegetables,12,kg,41,492,sales
+2026-08-14 13:36:00,Green Peas / Matar,vegetables,14,kg,64,896,sales
+2026-08-14 13:50:00,Green Peas / Matar,vegetables,11,kg,68,748,sales
+2026-08-15 04:21:00,Fresh Green Chillies,vegetables,11,kg,56,616,sales
+2026-08-15 08:44:00,Cold-Storage Agra Potato,vegetables,290,kg,16,4640,purchase
+2026-08-15 11:08:00,Nashik Red Onion,vegetables,222,kg,24,5328,purchase
+2026-08-15 13:05:00,Fresh Cauliflower,vegetables,80,piece,18,1440,purchase
+2026-08-15 13:29:00,Hybrid Red Tomatoes,vegetables,168,kg,18,3024,purchase
+2026-08-16 05:15:00,Green Peas / Matar,vegetables,10,kg,63,630,sales
+2026-08-16 07:04:00,Lady Finger / Bhindi,vegetables,7,kg,43,301,sales
+2026-08-16 11:06:00,Lady Finger / Bhindi,vegetables,9,kg,45,405,sales
+2026-08-16 15:40:00,Fresh Cauliflower,vegetables,7,piece,28,196,sales
+2026-08-17 04:04:00,Cold-Storage Agra Potato,vegetables,16,kg,22,352,sales
+2026-08-19 04:56:00,Lady Finger / Bhindi,vegetables,4,kg,45,180,sales
+2026-08-19 15:45:00,Cold-Storage Agra Potato,vegetables,22,kg,23,506,sales
+2026-08-20 05:24:00,Cold-Storage Agra Potato,vegetables,24,kg,22,528,sales
+2026-08-20 07:38:00,Hybrid Red Tomatoes,vegetables,10,kg,29,290,sales
+2026-08-20 07:57:00,Green Peas / Matar,vegetables,10,kg,67,670,sales
+2026-08-20 15:27:00,Fresh Ginger / Adrak,vegetables,20,kg,75,1500,purchase
+2026-08-21 12:34:00,Fresh Cauliflower,vegetables,14,piece,27,378,sales
+2026-08-21 13:43:00,Fresh Cauliflower,vegetables,9,piece,26,234,sales
+2026-08-21 15:01:00,Hybrid Red Tomatoes,vegetables,35,kg,28,980,sales
+2026-08-22 04:03:00,Fresh Green Chillies,vegetables,8,kg,53,424,sales
+2026-08-22 05:04:00,Fresh Green Chillies,vegetables,10,kg,53,530,sales
+2026-08-24 05:42:00,Cold-Storage Agra Potato,vegetables,22,kg,22,484,sales
+2026-08-24 06:04:00,Green Peas / Matar,vegetables,5,kg,65,325,sales
+2026-08-24 09:50:00,Cold-Storage Agra Potato,vegetables,20,kg,22,440,sales
+2026-08-24 12:09:00,Fresh Green Chillies,vegetables,24,kg,38,912,purchase
+2026-08-25 09:21:00,Fresh Ginger / Adrak,vegetables,1,kg,108,108,sales
+2026-08-26 03:53:00,Green Peas / Matar,vegetables,10,kg,65,650,sales
+2026-08-26 04:05:00,Nashik Red Onion,vegetables,32,kg,31,992,sales
+2026-08-26 05:17:00,Nashik Red Onion,vegetables,144,kg,24,3456,purchase
+2026-08-26 10:15:00,Nashik Red Onion,vegetables,32,kg,30,960,sales
+2026-08-26 12:43:00,Cold-Storage Agra Potato,vegetables,53,kg,24,1272,sales
+2026-08-27 12:13:00,Hybrid Red Tomatoes,vegetables,40,kg,18,720,purchase
+2026-08-27 15:31:00,Hybrid Red Tomatoes,vegetables,46,kg,27,1242,sales
+2026-08-27 15:57:00,Fresh Green Chillies,vegetables,40,kg,38,1520,purchase
+2026-08-28 14:40:00,Lady Finger / Bhindi,vegetables,5,kg,43,215,sales
+2026-08-28 15:35:00,Fresh Ginger / Adrak,vegetables,3,kg,108,324,sales
+2026-08-29 04:45:00,Lady Finger / Bhindi,vegetables,3,kg,45,135,sales
+2026-08-29 07:31:00,Hybrid Red Tomatoes,vegetables,28,kg,28,784,sales
+2026-08-29 10:18:00,Nashik Red Onion,vegetables,260,kg,24,6240,purchase
+2026-08-30 08:05:00,Fresh Cauliflower,vegetables,14,piece,28,392,sales
+2026-08-30 08:31:00,Lady Finger / Bhindi,vegetables,48,kg,28,1344,purchase
+2026-08-30 10:15:00,Green Peas / Matar,vegetables,9,kg,65,585,sales
+2026-08-30 12:38:00,Lady Finger / Bhindi,vegetables,4,kg,45,180,sales
+2026-08-30 14:36:00,Green Peas / Matar,vegetables,17,kg,65,1105,sales
+2026-08-31 03:03:00,Fresh Green Chillies,vegetables,3,kg,54,162,sales
+2026-09-01 07:24:00,Nashik Red Onion,vegetables,160,kg,24,3840,purchase
+2026-09-01 08:37:00,Green Peas / Matar,vegetables,6,kg,63,378,sales
+2026-09-01 14:20:00,Fresh Ginger / Adrak,vegetables,12,kg,75,900,purchase
+2026-09-02 13:23:00,Nashik Red Onion,vegetables,45,kg,32,1440,sales
+2026-09-02 14:48:00,Fresh Ginger / Adrak,vegetables,1,kg,110,110,sales
+2026-09-03 04:52:00,Hybrid Red Tomatoes,vegetables,32,kg,28,896,sales
+2026-09-03 12:30:00,Cold-Storage Agra Potato,vegetables,203,kg,16,3248,purchase
+2026-09-03 15:36:00,Fresh Ginger / Adrak,vegetables,2,kg,111,222,sales

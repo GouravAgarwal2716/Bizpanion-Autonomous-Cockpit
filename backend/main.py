@@ -3,14 +3,21 @@ Bizpanion Backend — Main FastAPI Application
 Autonomous Business Cockpit for Rural & Semi-Urban Micro-Entrepreneurs
 """
 import os
+import sys
 import asyncio
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from config import settings
-from routers import upload, agents, alerts, voice, tally, market, auth, decisions
+from routers import upload, agents, alerts, voice, tally, market, auth, decisions, dashboard
 from services.supabase_client import init_supabase
 
 
@@ -20,9 +27,9 @@ async def lifespan(app: FastAPI):
     # Create audio cache directory
     os.makedirs(settings.AUDIO_CACHE_DIR, exist_ok=True)
     os.makedirs("models", exist_ok=True)
-    print("✅ Bizpanion backend starting up...")
+    print("Bizpanion backend starting up successfully on port 8000...")
     yield
-    print("🛑 Bizpanion backend shutting down...")
+    print("Bizpanion backend shutting down...")
 
 
 app = FastAPI(
@@ -56,6 +63,7 @@ app.include_router(voice.router, prefix="/api/voice", tags=["voice"])
 app.include_router(tally.router, prefix="/api/tally", tags=["tally"])
 app.include_router(market.router, prefix="/api/market", tags=["market"])
 app.include_router(decisions.router, prefix="/api/decisions", tags=["decisions"])
+app.include_router(dashboard.router, prefix="/api/dashboard", tags=["dashboard"])
 
 
 @app.get("/")

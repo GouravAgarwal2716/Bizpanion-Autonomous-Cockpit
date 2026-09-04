@@ -1,0 +1,121 @@
+date,item_name,category,quantity,unit,selling_price_per_unit,total_amount,transaction_type
+2026-07-21 03:26:00,Havells 2.5mm Copper Wire 90m,hardware,16,coil,1850,29600,purchase
+2026-07-21 05:29:00,Astral PVC Pipe 4-inch 10ft,hardware,6,length,361,2166,sales
+2026-07-22 03:22:00,Havells 2.5mm Copper Wire 90m,hardware,3,coil,2198,6594,sales
+2026-07-22 03:25:00,TMT Steel Rebar 12mm,hardware,84,kg,67,5628,sales
+2026-07-22 06:16:00,UltraTech Super Cement 50kg,hardware,5,bag,386,1930,sales
+2026-07-22 08:52:00,Asian Paints Apex Ultima 20L,hardware,3,bucket,4449,13347,sales
+2026-07-22 13:40:00,Havells 2.5mm Copper Wire 90m,hardware,1,coil,2199,2199,sales
+2026-07-23 07:47:00,Anchor Modular Switch 6A,hardware,3,box,310,930,sales
+2026-07-23 10:50:00,TMT Steel Rebar 12mm,hardware,107,kg,67,7169,sales
+2026-07-24 03:58:00,Havells 2.5mm Copper Wire 90m,hardware,4,coil,2202,8808,sales
+2026-07-24 05:36:00,GI Binding Wire 1kg,hardware,10,roll,89,890,sales
+2026-07-24 09:12:00,GI Binding Wire 1kg,hardware,10,roll,88,880,sales
+2026-07-24 09:37:00,Brass Ball Valve 1-inch,hardware,5,piece,271,1355,sales
+2026-07-25 11:10:00,Anchor Modular Switch 6A,hardware,3,box,312,936,sales
+2026-07-25 13:13:00,Brass Ball Valve 1-inch,hardware,2,piece,268,536,sales
+2026-07-26 08:18:00,Anchor Modular Switch 6A,hardware,35,box,240,8400,purchase
+2026-07-27 13:41:00,GI Binding Wire 1kg,hardware,15,roll,89,1335,sales
+2026-07-28 04:24:00,Astral PVC Pipe 4-inch 10ft,hardware,8,length,361,2888,sales
+2026-07-29 10:24:00,GI Binding Wire 1kg,hardware,6,roll,93,558,sales
+2026-07-29 10:26:00,Asian Paints Apex Ultima 20L,hardware,1,bucket,4450,4450,sales
+2026-07-29 12:16:00,Astral PVC Pipe 4-inch 10ft,hardware,3,length,363,1089,sales
+2026-07-29 12:24:00,Brass Ball Valve 1-inch,hardware,6,piece,270,1620,sales
+2026-07-29 14:57:00,Astral PVC Pipe 4-inch 10ft,hardware,4,length,359,1436,sales
+2026-07-30 12:24:00,UltraTech Super Cement 50kg,hardware,10,bag,384,3840,sales
+2026-08-01 12:34:00,Asian Paints Apex Ultima 20L,hardware,3,bucket,4452,13356,sales
+2026-08-01 13:36:00,Astral PVC Pipe 4-inch 10ft,hardware,7,length,363,2541,sales
+2026-08-02 04:17:00,Brass Ball Valve 1-inch,hardware,3,piece,268,804,sales
+2026-08-02 05:29:00,Brass Ball Valve 1-inch,hardware,5,piece,273,1365,sales
+2026-08-02 08:09:00,TMT Steel Rebar 12mm,hardware,90,kg,65,5850,sales
+2026-08-03 04:19:00,Anchor Modular Switch 6A,hardware,3,box,309,927,sales
+2026-08-03 07:28:00,Havells 2.5mm Copper Wire 90m,hardware,3,coil,2202,6606,sales
+2026-08-04 10:01:00,Astral PVC Pipe 4-inch 10ft,hardware,32,length,290,9280,purchase
+2026-08-04 10:49:00,Brass Ball Valve 1-inch,hardware,4,piece,273,1092,sales
+2026-08-04 12:16:00,Astral PVC Pipe 4-inch 10ft,hardware,5,length,362,1810,sales
+2026-08-04 15:20:00,TMT Steel Rebar 12mm,hardware,35,kg,65,2275,sales
+2026-08-04 15:42:00,Brass Ball Valve 1-inch,hardware,3,piece,273,819,sales
+2026-08-05 06:57:00,Anchor Modular Switch 6A,hardware,3,box,313,939,sales
+2026-08-06 03:43:00,GI Binding Wire 1kg,hardware,15,roll,92,1380,sales
+2026-08-06 08:50:00,Havells 2.5mm Copper Wire 90m,hardware,2,coil,2200,4400,sales
+2026-08-07 03:36:00,Havells 2.5mm Copper Wire 90m,hardware,4,coil,2202,8808,sales
+2026-08-07 05:10:00,GI Binding Wire 1kg,hardware,5,roll,92,460,sales
+2026-08-07 13:21:00,UltraTech Super Cement 50kg,hardware,11,bag,383,4213,sales
+2026-08-08 04:25:00,Anchor Modular Switch 6A,hardware,2,box,309,618,sales
+2026-08-08 13:07:00,Astral PVC Pipe 4-inch 10ft,hardware,12,length,290,3480,purchase
+2026-08-08 15:59:00,Asian Paints Apex Ultima 20L,hardware,2,bucket,4448,8896,sales
+2026-08-09 07:28:00,Brass Ball Valve 1-inch,hardware,8,piece,270,2160,sales
+2026-08-09 15:13:00,Astral PVC Pipe 4-inch 10ft,hardware,8,length,361,2888,sales
+2026-08-10 03:05:00,GI Binding Wire 1kg,hardware,10,roll,93,930,sales
+2026-08-10 03:13:00,UltraTech Super Cement 50kg,hardware,27,bag,388,10476,sales
+2026-08-10 06:35:00,Havells 2.5mm Copper Wire 90m,hardware,4,coil,2202,8808,sales
+2026-08-10 09:49:00,Brass Ball Valve 1-inch,hardware,30,piece,210,6300,purchase
+2026-08-10 09:49:00,Anchor Modular Switch 6A,hardware,2,box,312,624,sales
+2026-08-11 04:51:00,Brass Ball Valve 1-inch,hardware,3,piece,272,816,sales
+2026-08-11 07:08:00,TMT Steel Rebar 12mm,hardware,81,kg,66,5346,sales
+2026-08-11 14:01:00,Astral PVC Pipe 4-inch 10ft,hardware,10,length,359,3590,sales
+2026-08-12 11:10:00,Brass Ball Valve 1-inch,hardware,30,piece,210,6300,purchase
+2026-08-14 03:42:00,Brass Ball Valve 1-inch,hardware,7,piece,270,1890,sales
+2026-08-14 07:32:00,Havells 2.5mm Copper Wire 90m,hardware,4,coil,2198,8792,sales
+2026-08-14 10:00:00,Asian Paints Apex Ultima 20L,hardware,1,bucket,4453,4453,sales
+2026-08-15 04:53:00,Asian Paints Apex Ultima 20L,hardware,1,bucket,4449,4449,sales
+2026-08-15 09:49:00,Anchor Modular Switch 6A,hardware,2,box,310,620,sales
+2026-08-15 10:31:00,Astral PVC Pipe 4-inch 10ft,hardware,7,length,361,2527,sales
+2026-08-15 11:37:00,Anchor Modular Switch 6A,hardware,4,box,310,1240,sales
+2026-08-16 11:24:00,Asian Paints Apex Ultima 20L,hardware,3,bucket,4453,13359,sales
+2026-08-17 07:24:00,TMT Steel Rebar 12mm,hardware,65,kg,62,4030,sales
+2026-08-17 09:41:00,Anchor Modular Switch 6A,hardware,3,box,310,930,sales
+2026-08-17 11:43:00,Anchor Modular Switch 6A,hardware,12,box,240,2880,purchase
+2026-08-18 10:05:00,Havells 2.5mm Copper Wire 90m,hardware,1,coil,2199,2199,sales
+2026-08-19 04:20:00,Anchor Modular Switch 6A,hardware,2,box,311,622,sales
+2026-08-19 04:56:00,Havells 2.5mm Copper Wire 90m,hardware,4,coil,2203,8812,sales
+2026-08-19 07:49:00,UltraTech Super Cement 50kg,hardware,18,bag,386,6948,sales
+2026-08-19 08:38:00,UltraTech Super Cement 50kg,hardware,28,bag,383,10724,sales
+2026-08-20 03:35:00,UltraTech Super Cement 50kg,hardware,26,bag,386,10036,sales
+2026-08-20 09:24:00,Astral PVC Pipe 4-inch 10ft,hardware,7,length,360,2520,sales
+2026-08-21 03:05:00,TMT Steel Rebar 12mm,hardware,248,kg,54,13392,purchase
+2026-08-21 03:13:00,GI Binding Wire 1kg,hardware,13,roll,93,1209,sales
+2026-08-21 06:51:00,Brass Ball Valve 1-inch,hardware,4,piece,269,1076,sales
+2026-08-21 07:31:00,GI Binding Wire 1kg,hardware,112,roll,72,8064,purchase
+2026-08-21 08:09:00,Asian Paints Apex Ultima 20L,hardware,1,bucket,4451,4451,sales
+2026-08-21 09:54:00,Astral PVC Pipe 4-inch 10ft,hardware,2,length,361,722,sales
+2026-08-21 10:40:00,Brass Ball Valve 1-inch,hardware,32,piece,210,6720,purchase
+2026-08-21 14:54:00,TMT Steel Rebar 12mm,hardware,111,kg,67,7437,sales
+2026-08-23 05:15:00,Asian Paints Apex Ultima 20L,hardware,3,bucket,4448,13344,sales
+2026-08-23 05:17:00,Brass Ball Valve 1-inch,hardware,2,piece,270,540,sales
+2026-08-23 07:35:00,UltraTech Super Cement 50kg,hardware,12,bag,383,4596,sales
+2026-08-24 08:42:00,UltraTech Super Cement 50kg,hardware,19,bag,387,7353,sales
+2026-08-25 03:31:00,TMT Steel Rebar 12mm,hardware,78,kg,66,5148,sales
+2026-08-25 15:44:00,Brass Ball Valve 1-inch,hardware,3,piece,270,810,sales
+2026-08-26 04:26:00,Anchor Modular Switch 6A,hardware,5,box,313,1565,sales
+2026-08-26 08:51:00,Anchor Modular Switch 6A,hardware,5,box,310,1550,sales
+2026-08-27 08:41:00,UltraTech Super Cement 50kg,hardware,21,bag,388,8148,sales
+2026-08-27 11:18:00,Anchor Modular Switch 6A,hardware,3,box,312,936,sales
+2026-08-27 15:06:00,GI Binding Wire 1kg,hardware,14,roll,89,1246,sales
+2026-08-28 03:05:00,UltraTech Super Cement 50kg,hardware,11,bag,386,4246,sales
+2026-08-28 07:51:00,Astral PVC Pipe 4-inch 10ft,hardware,10,length,360,3600,sales
+2026-08-28 08:14:00,Anchor Modular Switch 6A,hardware,3,box,308,924,sales
+2026-08-28 11:34:00,Havells 2.5mm Copper Wire 90m,hardware,10,coil,1850,18500,purchase
+2026-08-28 13:12:00,Brass Ball Valve 1-inch,hardware,4,piece,273,1092,sales
+2026-08-28 13:41:00,TMT Steel Rebar 12mm,hardware,67,kg,66,4422,sales
+2026-08-28 15:55:00,GI Binding Wire 1kg,hardware,13,roll,92,1196,sales
+2026-08-29 05:18:00,UltraTech Super Cement 50kg,hardware,16,bag,383,6128,sales
+2026-08-29 07:13:00,GI Binding Wire 1kg,hardware,40,roll,72,2880,purchase
+2026-08-29 08:06:00,GI Binding Wire 1kg,hardware,60,roll,72,4320,purchase
+2026-08-29 13:33:00,Anchor Modular Switch 6A,hardware,5,box,311,1555,sales
+2026-08-30 10:22:00,Brass Ball Valve 1-inch,hardware,4,piece,268,1072,sales
+2026-08-31 07:58:00,Havells 2.5mm Copper Wire 90m,hardware,1,coil,2198,2198,sales
+2026-08-31 11:00:00,Anchor Modular Switch 6A,hardware,28,box,240,6720,purchase
+2026-08-31 11:36:00,TMT Steel Rebar 12mm,hardware,49,kg,66,3234,sales
+2026-08-31 12:13:00,TMT Steel Rebar 12mm,hardware,54,kg,66,3564,sales
+2026-09-01 03:18:00,Brass Ball Valve 1-inch,hardware,2,piece,269,538,sales
+2026-09-01 09:38:00,Havells 2.5mm Copper Wire 90m,hardware,1,coil,2198,2198,sales
+2026-09-01 11:46:00,Asian Paints Apex Ultima 20L,hardware,2,bucket,4452,8904,sales
+2026-09-01 12:47:00,Anchor Modular Switch 6A,hardware,1,box,313,313,sales
+2026-09-02 09:44:00,TMT Steel Rebar 12mm,hardware,99,kg,62,6138,sales
+2026-09-02 11:31:00,Brass Ball Valve 1-inch,hardware,8,piece,269,2152,sales
+2026-09-03 04:47:00,Astral PVC Pipe 4-inch 10ft,hardware,3,length,362,1086,sales
+2026-09-03 11:19:00,GI Binding Wire 1kg,hardware,4,roll,93,372,sales
+2026-09-03 11:32:00,GI Binding Wire 1kg,hardware,5,roll,89,445,sales
+2026-09-03 12:01:00,Astral PVC Pipe 4-inch 10ft,hardware,3,length,363,1089,sales
+2026-09-03 14:44:00,Astral PVC Pipe 4-inch 10ft,hardware,10,length,362,3620,sales

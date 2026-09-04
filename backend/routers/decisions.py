@@ -58,13 +58,22 @@ async def get_scenarios(business_id: str):
         for a in alerts
     ]
 
+    # Fetch benchmark market prices
+    sb = db.get_supabase()
+    market_prices = []
+    try:
+        res = sb.table("market_prices").select("*").order("date", desc=True).limit(50).execute()
+        market_prices = res.data or []
+    except Exception:
+        pass
+
     language = Language(profile.get("language", "en"))
     scenarios = await generate_decision_scenarios(
         business_id=business_id,
         profile=profile,
         transactions=transactions,
         inventory=inventory,
-        market_prices=[],
+        market_prices=market_prices,
         anomalies=anomalies,
         language=language,
     )

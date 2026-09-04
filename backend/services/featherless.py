@@ -102,44 +102,79 @@ async def get_embeddings_batch(texts: list[str]) -> list[list[float]]:
         return [item["embedding"] for item in sorted(data["data"], key=lambda x: x["index"])]
 
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 async def text_to_speech(
     text: str,
     language: Language,
     cache_key: str | None = None,
 ) -> str:
     """
-    Convert text to speech via Featherless TTS.
+    Convert text to speech via Featherless TTS with automatic offline gTTS fallback.
     Returns local file path (which is served as /audio/<filename>).
     Caches by cache_key to avoid re-generating on every request.
     """
     cache_dir = Path(settings.AUDIO_CACHE_DIR)
-    cache_dir.mkdir(exist_ok=True)
+    cache_dir.mkdir(parents=True, exist_ok=True)
 
-    filename = f"{cache_key or hash(text[:50])}.wav"
-    cached_path = cache_dir / filename
+    safe_key = cache_key or f"audio_{abs(hash(text[:60]))}"
+    mp3_filename = f"{safe_key}.mp3"
+    wav_filename = f"{safe_key}.wav"
 
-    if cached_path.exists():
-        return f"/audio/{filename}"
+    cached_mp3 = cache_dir / mp3_filename
+    cached_wav = cache_dir / wav_filename
 
-    voice_config = LANGUAGE_VOICE_MAP.get(language, LANGUAGE_VOICE_MAP[Language.ENGLISH])
+    if cached_mp3.exists() and cached_mp3.stat().st_size > 0:
+        return f"/audio/{mp3_filename}"
+    if cached_wav.exists() and cached_wav.stat().st_size > 0:
+        return f"/audio/{wav_filename}"
 
-    async with httpx.AsyncClient(timeout=120) as client:
-        response = await client.post(
-            f"{settings.FEATHERLESS_BASE_URL}/audio/speech",
-            headers={
-                "Authorization": f"Bearer {settings.FEATHERLESS_API_KEY}",
-                "Content-Type": "application/json",
-            },
-            json={
-                "model": settings.FEATHERLESS_TTS_MODEL,
-                "input": text,
-                "voice": voice_config["voice"],
-                "response_format": "wav",
-            },
-        )
-        response.raise_for_status()
+    # 1. Try Featherless TTS if configured
+    if settings.FEATHERLESS_API_KEY and not settings.FEATHERLESS_API_KEY.startswith("your_"):
+        voice_config = LANGUAGE_VOICE_MAP.get(language, LANGUAGE_VOICE_MAP[Language.ENGLISH])
+        try:
+            async with httpx.AsyncClient(timeout=30) as client:
+                response = await client.post(
+                    f"{settings.FEATHERLESS_BASE_URL}/audio/speech",
+                    headers={
+                        "Authorization": f"Bearer {settings.FEATHERLESS_API_KEY}",
+                        "Content-Type": "application/json",
+                    },
+                    json={
+                        "model": settings.FEATHERLESS_TTS_MODEL,
+                        "input": text,
+                        "voice": voice_config["voice"],
+                        "response_format": "mp3",
+                    },
+                )
+                if response.status_code == 200 and len(response.content) > 0:
+                    with open(cached_mp3, "wb") as f:
+                        f.write(response.content)
+                    return f"/audio/{mp3_filename}"
+                else:
+                    logger.warning(f"Featherless TTS returned HTTP {response.status_code} ({response.text[:120]}), activating gTTS fallback.")
+        except Exception as e:
+            logger.warning(f"Featherless TTS call failed ({e}), activating gTTS fallback.")
 
-    with open(cached_path, "wb") as f:
-        f.write(response.content)
+    # 2. Resilient gTTS Fallback
+    try:
+        lang_code = language.value if isinstance(language, Language) else str(language)
+        # Verify valid gtts lang code, default to 'en'
+        supported_gtts = {"en", "hi", "ta", "te", "kn", "mr", "bn", "gu"}
+        if lang_code not in supported_gtts:
+            lang_code = "en"
 
-    return f"/audio/{filename}"
+        def _generate_gtts():
+            from gtts import gTTS
+            tts = gTTS(text=text, lang=lang_code, slow=False)
+            tts.save(str(cached_mp3))
+
+        await asyncio.to_thread(_generate_gtts)
+        return f"/audio/{mp3_filename}"
+    except Exception as gtts_err:
+        logger.error(f"gTTS audio generation error: {gtts_err}")
+        return ""
+
