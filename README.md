@@ -3,6 +3,9 @@
 > **Next-Gen AI Financial Cockpit, Voice RAG, PyTorch Cashflow Forecasting & Real-Time ERP Automation for Micro-Enterprises.**  
 > Submitted for CodeSpectra AI Evaluation Platform · 2026
 
+🌐 **Live Deployed Web App**: [https://bizpanion-autonomous-cockpit.vercel.app](https://bizpanion-autonomous-cockpit.vercel.app)
+
+[![Live Web App](https://img.shields.io/badge/Vercel-Live--Production-000000?style=for-the-badge&logo=vercel)](https://bizpanion-autonomous-cockpit.vercel.app)
 [![Featherless.ai](https://img.shields.io/badge/LLM-Featherless.ai%20(Qwen2.5--7B)--6366f1)](https://featherless.ai)
 [![PyTorch](https://img.shields.io/badge/ML-PyTorch%20LSTM--ee4c2c)](https://pytorch.org)
 [![Pinecone](https://img.shields.io/badge/VectorDB-Pinecone%20RAG--009688)](https://pinecone.io)

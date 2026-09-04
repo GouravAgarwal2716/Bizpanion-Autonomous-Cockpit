@@ -13,10 +13,14 @@
 
 ---
 
+🌐 **Live Production Application URL**: [https://bizpanion-autonomous-cockpit.vercel.app](https://bizpanion-autonomous-cockpit.vercel.app)
+
+---
+
 ## 🎬 3-Minute Live Demo Flow (Guaranteed to WOW the Judges)
 
 ### Step 1: The Multi-Sector Transformation (Home Dashboard)
-* **URL:** `http://localhost:3000/home`
+* **URL:** [https://bizpanion-autonomous-cockpit.vercel.app/home](https://bizpanion-autonomous-cockpit.vercel.app/home) (or `http://localhost:3000/home`)
 * **What to do:**
   1. Show the header metrics: **Cash Runway (38 Days)**, **Recorded Turnover (₹4.82L)**, and **Tally Gateway (Port 9000)**.
   2. Point to the **DEMO SECTOR** bar in the top right: `[ 🛒 Kirana ] [ 🥛 Dairy ] [ 🧵 Textile ] [ 🔧 Hardware ] [ 🍅 Produce ]`.
