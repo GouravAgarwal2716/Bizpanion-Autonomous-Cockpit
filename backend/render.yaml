@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: bizpanion-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: FEATHERLESS_API_KEY
+        sync: false
+      - key: FEATHERLESS_LLM_MODEL
+        value: Qwen/Qwen2.5-7B-Instruct
+      - key: FEATHERLESS_BASE_URL
+        value: https://api.featherless.ai/v1
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_WHATSAPP_FROM
+        value: whatsapp:+14155238886

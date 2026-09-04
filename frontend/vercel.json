@@ -1,12 +1,5 @@
-# Vercel configuration for Next.js frontend deployment
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "devCommand": "npm run dev",
-  "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
-    "NEXT_PUBLIC_API_URL": "@backend_api_url"
-  }
+  "devCommand": "npm run dev"
 }
