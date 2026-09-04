@@ -192,16 +192,73 @@ Business types: dairy_farmer, food_processing, vegetable_vendor""",
 ]
 
 
+def load_custom_pdfs(docs_dir: str) -> list[dict]:
+    """Scan directory for PDF files and extract text chunks with pypdf."""
+    pdf_docs = []
+    if not os.path.exists(docs_dir):
+        return pdf_docs
+    
+    try:
+        from pypdf import PdfReader
+    except ImportError:
+        return pdf_docs
+
+    for fname in os.listdir(docs_dir):
+        if not fname.lower().endswith(".pdf"):
+            continue
+        fpath = os.path.join(docs_dir, fname)
+        try:
+            reader = PdfReader(fpath)
+            scheme_title = os.path.splitext(fname)[0].replace("_", " ").title()
+            for page_num, page in enumerate(reader.pages):
+                text = page.extract_text()
+                if not text or len(text.strip()) < 50:
+                    continue
+                # Split large pages into 500-word chunks
+                words = text.split()
+                chunk_size = 400
+                for chunk_idx in range(0, len(words), chunk_size):
+                    chunk_text = " ".join(words[chunk_idx:chunk_idx+chunk_size])
+                    doc_id = f"pdf-{fname[:12]}-p{page_num+1}-c{chunk_idx//chunk_size+1}"
+                    pdf_docs.append({
+                        "id": doc_id,
+                        "text": f"Scheme: {scheme_title} (Page {page_num+1})\n{chunk_text}",
+                        "metadata": {
+                            "scheme_name": scheme_title,
+                            "source_file": fname,
+                            "page": page_num + 1,
+                            "eligibility": "Refer to official guideline PDF",
+                            "benefit": "See extract details",
+                            "apply_url": "https://www.india.gov.in/",
+                            "business_type": "all",
+                            "deadline": "",
+                        }
+                    })
+            print(f"📄 Loaded & chunked PDF: {fname} ({len(reader.pages)} pages)")
+        except Exception as e:
+            print(f"⚠️ Error reading PDF {fname}: {e}")
+    return pdf_docs
+
+
 async def seed():
-    print(f"Embedding and uploading {len(SCHEME_DOCUMENTS)} scheme documents to Pinecone...")
-    count = await embed_and_upsert_documents(SCHEME_DOCUMENTS)
-    print(f"✅ Seeded {count} scheme document chunks into Pinecone")
+    docs_dir = os.path.join(os.path.dirname(__file__), "..", "data", "scheme_docs")
+    pdf_docs = load_custom_pdfs(docs_dir)
+    all_docs = SCHEME_DOCUMENTS + pdf_docs
+    
+    print(f"Embedding and uploading {len(all_docs)} scheme documents (including {len(pdf_docs)} PDF chunks) to Pinecone...")
+    try:
+        count = await embed_and_upsert_documents(all_docs)
+        print(f"✅ Seeded {count} scheme document chunks into Pinecone")
+    except Exception as e:
+        print(f"⚠️ Pinecone upsert skipped ({e}) — RAG will use the rich embedded database.")
+        
     print("\nTest query:")
     from agents.rag_agent import query_schemes
     results = await query_schemes("vegetable vendor loan", "vegetable_vendor", "Maharashtra", top_k=3)
     for r in results:
-        print(f"  - {r['scheme_name']} (score: {r['score']:.3f}): {r['benefit']}")
+        print(f"  - {r.get('scheme_name')} (score: {r.get('score', 0):.2f}): {r.get('benefit', '')}")
 
 
 if __name__ == "__main__":
     asyncio.run(seed())
+

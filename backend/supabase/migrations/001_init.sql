@@ -148,6 +148,41 @@ CREATE POLICY "own_alerts" ON alerts_log FOR ALL USING (
 ALTER TABLE market_prices ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "market_prices_read" ON market_prices FOR SELECT USING (TRUE);
 
+-- ─── Voice Sessions & Advisory Memory ───────────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS voice_sessions (
+    id              UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    business_id     UUID NOT NULL REFERENCES business_profile(id) ON DELETE CASCADE,
+    session_title   TEXT DEFAULT 'Voice Advisory Session',
+    language        TEXT NOT NULL DEFAULT 'en',
+    messages        JSONB NOT NULL DEFAULT '[]',
+    summary         TEXT,
+    action_items    JSONB DEFAULT '[]',
+    created_at      TIMESTAMPTZ DEFAULT NOW(),
+    updated_at      TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_voice_sessions_business ON voice_sessions(business_id, created_at DESC);
+
+-- ─── Decision Sandbox & Strategy Scenarios ───────────────────────────────────
+
+CREATE TABLE IF NOT EXISTS decision_scenarios (
+    id                  UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    business_id         UUID NOT NULL REFERENCES business_profile(id) ON DELETE CASCADE,
+    scenario_title      TEXT NOT NULL,
+    category            TEXT NOT NULL, -- 'pricing', 'inventory', 'expansion', 'credit'
+    problem_statement   TEXT NOT NULL,
+    steps               JSONB NOT NULL DEFAULT '[]',
+    user_choices        JSONB NOT NULL DEFAULT '{}',
+    simulated_impact    JSONB NOT NULL DEFAULT '{}',
+    recommended_blueprint TEXT,
+    scheme_citations    JSONB DEFAULT '[]',
+    status              TEXT DEFAULT 'completed',
+    created_at          TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_decision_scenarios_business ON decision_scenarios(business_id, created_at DESC);
+
 -- ─── Updated_at trigger ───────────────────────────────────────────────────
 
 CREATE OR REPLACE FUNCTION update_updated_at()
@@ -165,3 +200,8 @@ CREATE TRIGGER trg_business_profile_updated
 CREATE TRIGGER trg_memory_updated
     BEFORE UPDATE ON memory
     FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER trg_voice_sessions_updated
+    BEFORE UPDATE ON voice_sessions
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+

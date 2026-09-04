@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from config import settings
-from routers import upload, agents, alerts, voice, tally, market, auth
+from routers import upload, agents, alerts, voice, tally, market, auth, decisions
 from services.supabase_client import init_supabase
 
 
@@ -55,6 +55,7 @@ app.include_router(alerts.router, prefix="/api/alerts", tags=["alerts"])
 app.include_router(voice.router, prefix="/api/voice", tags=["voice"])
 app.include_router(tally.router, prefix="/api/tally", tags=["tally"])
 app.include_router(market.router, prefix="/api/market", tags=["market"])
+app.include_router(decisions.router, prefix="/api/decisions", tags=["decisions"])
 
 
 @app.get("/")
