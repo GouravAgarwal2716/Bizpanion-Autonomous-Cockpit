@@ -6,10 +6,14 @@ from pydantic_settings import BaseSettings
 from pydantic import Field
 
 
+import os
+
+ENV_PATH = os.path.join(os.path.dirname(__file__), ".env")
+
 class Settings(BaseSettings):
     # Featherless.ai
     FEATHERLESS_API_KEY: str = ""
-    FEATHERLESS_LLM_MODEL: str = "meta-llama/Llama-3.1-70B-Instruct"
+    FEATHERLESS_LLM_MODEL: str = "Qwen/Qwen2.5-7B-Instruct"
     FEATHERLESS_EMBEDDING_MODEL: str = "Qwen/Qwen3-Embedding-8B"
     FEATHERLESS_TTS_MODEL: str = "hexgrad/Kokoro-82M"
     FEATHERLESS_BASE_URL: str = "https://api.featherless.ai/v1"
@@ -44,7 +48,7 @@ class Settings(BaseSettings):
     SALES_ZSCORE_THRESHOLD: float = 2.0         # flag if z-score > 2
 
     class Config:
-        env_file = ".env"
+        env_file = ENV_PATH
         extra = "ignore"
 
 
