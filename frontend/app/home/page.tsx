@@ -18,7 +18,7 @@ import {
 import { generateExecutiveReportPDF } from '@/lib/pdfGenerator';
 import { getLang, type Lang, t } from '@/lib/i18n';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bizpanion-autonomous-cockpit-backend.onrender.com';
 
 function Sparkline({ data, color = '#eab308', height = 32 }: { data: number[]; color?: string; height?: number }) {
   if (!data || data.length < 2) return null;

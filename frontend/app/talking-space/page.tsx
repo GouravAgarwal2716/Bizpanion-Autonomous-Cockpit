@@ -107,7 +107,8 @@ export default function TalkingSpacePage() {
       audioPlayerRef.current.pause();
     }
 
-    const fullUrl = url.startsWith('http') ? url : `http://localhost:8000${url}`;
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bizpanion-autonomous-cockpit-backend.onrender.com';
+    const fullUrl = url.startsWith('http') ? url : `${API_URL}${url}`;
     const audio = new Audio(fullUrl);
     audioPlayerRef.current = audio;
 

@@ -6,7 +6,7 @@ import { getStoredBusinessId, getAlerts, getDashboardOverview } from '@/lib/api'
 import { generateExecutiveReportPDF } from '@/lib/pdfGenerator';
 import { getLang, type Lang, t } from '@/lib/i18n';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bizpanion-autonomous-cockpit-backend.onrender.com';
 
 export default function ReportsPage() {
   const [lang, setLang] = useState<Lang>('en');

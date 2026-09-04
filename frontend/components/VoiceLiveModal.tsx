@@ -70,7 +70,7 @@ export default function VoiceLiveModal({ isOpen, onClose, businessId, initialLan
 
   function playAssistantAudio(url: string, text?: string) {
     setStatus('speaking');
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bizpanion-autonomous-cockpit-backend.onrender.com';
     const fullUrl = url ? (url.startsWith('http') ? url : `${API_URL}${url}`) : '';
     
     if (audioPlayerRef.current) {
