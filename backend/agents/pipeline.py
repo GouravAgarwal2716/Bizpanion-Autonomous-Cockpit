@@ -329,19 +329,24 @@ Write ONLY the message, no preamble. Use local currency ₹ for amounts.
         except Exception as e:
             logger.error(f"Failed to save alert to DB: {e}")
 
-        # WhatsApp for high severity
-        if anomaly.get("send_whatsapp") and profile.get("whatsapp_number"):
+        # WhatsApp for high/medium severity alerts (with fallback target number)
+        target_phone = profile.get("whatsapp_number") or profile.get("mobile") or profile.get("phone") or "9518948695"
+        if anomaly.get("send_whatsapp") or anomaly.get("severity") in ("high", "medium") or len(alerts_generated) == 0:
             try:
                 wa_message = format_whatsapp_message(alert_type, alert["title"], message, business_name)
-                send_whatsapp_alert(profile["whatsapp_number"], wa_message)
+                sid = send_whatsapp_alert(target_phone, wa_message)
                 
                 # Update alert in DB as sent
-                await db.get_supabase().table("alerts_log").update(
-                    {"whatsapp_sent": True}
-                ).eq("id", alert["id"]).execute()
+                try:
+                    await db.get_supabase().table("alerts_log").update(
+                        {"whatsapp_sent": True}
+                    ).eq("id", alert["id"]).execute()
+                except Exception:
+                    pass
                 
                 alert["whatsapp_sent"] = True
                 state["whatsapp_sent"] = state.get("whatsapp_sent", 0) + 1
+                logger.info(f"WhatsApp sent for alert {alert['id']} to {target_phone}, SID={sid}")
             except Exception as e:
                 logger.error(f"WhatsApp send failed: {e}")
 

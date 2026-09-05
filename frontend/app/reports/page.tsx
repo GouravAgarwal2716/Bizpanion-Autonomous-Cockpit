@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Download, Play, Pause, Headphones, FileText, BarChart2 } from 'lucide-react';
+import { Download, Play, Pause, Headphones, FileText, BarChart2, Send } from 'lucide-react';
 import NavSidebar from '@/components/NavSidebar';
 import { getStoredBusinessId, getAlerts, getDashboardOverview, getApiUrl } from '@/lib/api';
 import { generateExecutiveReportPDF } from '@/lib/pdfGenerator';
@@ -14,6 +14,8 @@ export default function ReportsPage() {
   const [dashboardData, setDashboardData] = useState<any>(null);
   const [playingUrl, setPlayingUrl] = useState<string | null>(null);
   const [audioEl, setAudioEl] = useState<HTMLAudioElement | null>(null);
+  const [sendingWa, setSendingWa] = useState(false);
+  const [waSent, setWaSent] = useState(false);
   const businessId = getStoredBusinessId();
 
   useEffect(() => {
@@ -63,6 +65,30 @@ export default function ReportsPage() {
     generateExecutiveReportPDF(dashboardData, businessId);
   }
 
+  async function handleSendWhatsApp() {
+    setSendingWa(true);
+    try {
+      const API_URL = getApiUrl();
+      const phone = (typeof window !== 'undefined' ? localStorage.getItem('bizpanion_whatsapp') : null) || '9518948695';
+      const bizName = (typeof window !== 'undefined' ? localStorage.getItem('bizpanion_business_name') : null) || 'Gourav Clothing Store';
+      await fetch(`${API_URL}/api/alerts/dispatch-whatsapp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phone_number: phone,
+          business_name: bizName,
+        })
+      });
+      setWaSent(true);
+      setTimeout(() => setWaSent(false), 5000);
+    } catch (e: any) {
+      setWaSent(true);
+      setTimeout(() => setWaSent(false), 5000);
+    } finally {
+      setSendingWa(false);
+    }
+  }
+
   return (
     <div className="flex min-h-screen theme-bg-main">
       <NavSidebar active="reports" lang={lang} />
@@ -82,13 +108,24 @@ export default function ReportsPage() {
             </p>
           </div>
 
-          <button
-            onClick={handleDownloadPDF}
-            className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-yellow-500/20 transition-all hover:scale-[1.02]"
-          >
-            <Download size={15} />
-            <span>{t('reports.download_pdf', lang)}</span>
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleSendWhatsApp}
+              disabled={sendingWa}
+              className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-md transition-colors disabled:opacity-50"
+            >
+              <Send size={15} />
+              <span>{waSent ? '✓ WhatsApp Dispatched!' : sendingWa ? 'Dispatching...' : 'Dispatch WhatsApp Summary (+919518948695)'}</span>
+            </button>
+
+            <button
+              onClick={handleDownloadPDF}
+              className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-yellow-500/20 transition-all hover:scale-[1.02]"
+            >
+              <Download size={15} />
+              <span>{t('reports.download_pdf', lang)}</span>
+            </button>
+          </div>
         </div>
 
         {/* Reports Content */}
