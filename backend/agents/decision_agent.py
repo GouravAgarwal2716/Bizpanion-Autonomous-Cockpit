@@ -429,7 +429,10 @@ Calculate dynamic financial outcomes and strategic rationale in valid JSON forma
 }}
 Return ONLY JSON."""
         
-        llm_res = call_llm(llm_prompt, temperature=0.3)
+        import concurrent.futures
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+            future = executor.submit(call_llm, llm_prompt, temperature=0.3, max_tokens=150)
+            llm_res = future.result(timeout=2.5)
         import json
         clean_json = llm_res.strip().replace("```json", "").replace("```", "").strip()
         parsed = json.loads(clean_json)

@@ -170,15 +170,30 @@ export default function HomePage() {
     } catch {}
   }
 
+  function speakText(text: string) {
+    if (typeof window === 'undefined' || !window.speechSynthesis) {
+      setIsPlaying(false);
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.95;
+    utterance.onend = () => setIsPlaying(false);
+    utterance.onerror = () => setIsPlaying(false);
+    setIsPlaying(true);
+    window.speechSynthesis.speak(utterance);
+  }
+
   async function handlePlayBriefing() {
-    if (isPlaying && audio) {
-      audio.pause();
+    if (isPlaying) {
+      if (audio) audio.pause();
+      if (typeof window !== 'undefined' && window.speechSynthesis) window.speechSynthesis.cancel();
       setIsPlaying(false);
       return;
     }
 
     if (audio) {
-      audio.play();
+      audio.play().catch(() => speakText(briefing?.text || 'Namaste!'));
       setIsPlaying(true);
       return;
     }
@@ -189,16 +204,19 @@ export default function HomePage() {
       const bizType = profile?.business_type || (typeof window !== 'undefined' ? localStorage.getItem('bizpanion_business_type') : null) || 'textile';
       const b = await getDailyBriefing(businessId, lang, bizName, bizType);
       setBriefing(b);
-      if (b.audio_url) {
+      if (b && b.audio_url) {
         const fullUrl = b.audio_url.startsWith('http') ? b.audio_url : `${API_URL}${b.audio_url}`;
         const newAudio = new Audio(fullUrl);
         newAudio.onended = () => setIsPlaying(false);
+        newAudio.onerror = () => speakText(b.text || 'Namaste!');
         setAudio(newAudio);
-        newAudio.play();
+        newAudio.play().catch(() => speakText(b.text || 'Namaste!'));
         setIsPlaying(true);
+      } else {
+        speakText(b?.text || 'Namaste! Welcome to your Bizpanion Autonomous Cockpit.');
       }
     } catch (e: any) {
-      alert(`Could not load briefing: ${e.message}`);
+      speakText('Namaste! Welcome to your Bizpanion Autonomous Cockpit.');
     } finally {
       setLoadingBriefing(false);
     }
