@@ -13,8 +13,11 @@ import {
   getDailyBriefing, 
   getProfile, 
   getStoredUserId,
-  getDashboardOverview
-import { getApiUrl } from '@/lib/api';
+  getDashboardOverview,
+  getApiUrl,
+} from '@/lib/api';
+import { generateExecutiveReportPDF } from '@/lib/pdfGenerator';
+import { getLang, type Lang, t } from '@/lib/i18n';
 
 const API_URL = getApiUrl();
 
