@@ -228,6 +228,7 @@ async def load_sample_dataset(req: LoadSampleRequest):
         **profile,
         "id": req.business_id,
         "business_type": req.sector.lower(),
+        "whatsapp_number": profile.get("whatsapp_number") or profile.get("mobile") or profile.get("phone") or "9518948695",
     }
     if req.language:
         updated_profile["language"] = req.language
@@ -242,12 +243,12 @@ async def load_sample_dataset(req: LoadSampleRequest):
 
     # ── AUTO WhatsApp Ingestion Notification ─────────────────────────────────
     try:
-        phone = profile.get("mobile") or profile.get("phone") or profile.get("whatsapp_number") or "9518948695"
-        biz_name = profile.get("business_name", "Your Enterprise")
+        phone = updated_profile["whatsapp_number"]
+        biz_name = updated_profile.get("business_name") or "Gourav Clothing Store"
         if phone:
             from services.twilio_service import send_whatsapp_alert
             wa_msg = (
-                f"📥 *Bizpanion — {req.sector.title()} Dataset Loaded*\n\n"
+                f"📥 *Bizpanion — {req.sector.title()} Data Ingested Autonomously*\n\n"
                 f"*{biz_name}* — sector demo data ingested successfully.\n\n"
                 f"📊 {written} records · {final_result.get('rows_cleaned', written)} cleaned\n"
                 f"🤖 {agent_res.get('alerts_generated', 0)} alerts generated\n"
@@ -255,8 +256,8 @@ async def load_sample_dataset(req: LoadSampleRequest):
                 f"_View your dashboard for live market benchmarks & insights._"
             )
             try:
-                send_whatsapp_alert(phone, wa_msg)
-                logger.info(f"Auto WhatsApp sent for sample load: {req.sector} to {phone}")
+                wa_sid = send_whatsapp_alert(phone, wa_msg)
+                logger.info(f"Auto WhatsApp sent for sample load: {req.sector} to {phone}, SID={wa_sid}")
             except Exception as wa_e:
                 logger.warning(f"Auto WhatsApp failed: {wa_e}")
     except Exception as e:

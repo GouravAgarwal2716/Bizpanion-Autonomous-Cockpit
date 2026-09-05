@@ -2,8 +2,11 @@
 RAG Agent — Featherless Embeddings + Pinecone
 Retrieves relevant government scheme information for a business query.
 """
-import asyncio
-from pinecone import Pinecone, ServerlessSpec
+try:
+    from pinecone import Pinecone, ServerlessSpec
+except ImportError:
+    Pinecone = None
+    ServerlessSpec = None
 from services.featherless import get_embedding, get_embeddings_batch
 from config import settings
 import logging
@@ -15,6 +18,8 @@ _pinecone_index = None
 
 def get_pinecone_index():
     global _pinecone_index
+    if Pinecone is None:
+        return None
     if _pinecone_index is None:
         pc = Pinecone(api_key=settings.PINECONE_API_KEY)
         # Create index if it doesn't exist

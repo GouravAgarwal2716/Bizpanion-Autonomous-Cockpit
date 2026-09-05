@@ -224,19 +224,27 @@ def simulate_decision_outcome(
     language: Language = Language.ENGLISH,
 ) -> dict:
     """
-    Computes mathematical impact projection for the chosen decision path.
-    Properly handles both string keys ('1', '2', '3') and integer keys (1, 2, 3),
-    and computes dynamic compounding impact based on all choices made.
+    Computes dynamic, mathematical impact projection for the chosen decision path.
+    Properly handles string keys ('1', '2', '3'), integer keys (1, 2, 3), and option IDs/labels,
+    computing unique compounding financial outcomes for every choice combination.
     """
-    cat = scenario.get("category", "pricing")
+    sc_title = str(scenario.get("scenario_title") or scenario.get("title") or "").lower()
+    cat = scenario.get("category", "")
+    if not cat:
+        if "pricing" in sc_title or "fmcg" in sc_title or "margin" in sc_title:
+            cat = "pricing"
+        elif "stock" in sc_title or "procurement" in sc_title or "supply" in sc_title or "buffer" in sc_title:
+            cat = "inventory"
+        else:
+            cat = "expansion"
     
-    def get_choice(step_num: int, default: str = "") -> str:
+    def get_choice(step_num: int) -> str:
         val = (
             choices.get(step_num)
             or choices.get(str(step_num))
             or choices.get(f"step_{step_num}")
         )
-        return str(val).strip() if val is not None else default
+        return str(val).strip().lower() if val is not None else ""
 
     opt1 = get_choice(1)
     opt2 = get_choice(2)
@@ -250,16 +258,16 @@ def simulate_decision_outcome(
     subsidy_savings = 0
     choice_narratives = []
 
-    if cat == "pricing":
+    if cat == "pricing" or "sc1" in str(scenario.get("scenario_id", "")):
         # Step 1: Pricing strategy
-        if opt1 == "p2":
+        if "full" in opt1 or "parity" in opt1 or opt1 == "p2":
             rev_gain_pct = 26.0
             profit_gain_monthly = 17500
             working_cap_needed = 3000
             payback_days = 12
             risk_level = "Moderate"
             choice_narratives.append("Matched Mandi modal price (+26% revenue)")
-        elif opt1 == "p3":
+        elif "gradual" in opt1 or "tiered" in opt1 or "premium" in opt1 or opt1 == "p3":
             rev_gain_pct = 19.5
             profit_gain_monthly = 13800
             working_cap_needed = 2500
@@ -275,91 +283,101 @@ def simulate_decision_outcome(
             choice_narratives.append("Conservative 15% price adjustment (+12% revenue)")
 
         # Step 2: Customer retention
-        if opt2 == "c1":
+        if "bulk" in opt2 or "disc" in opt2 or opt2 == "c1":
             rev_gain_pct -= 1.5
             profit_gain_monthly += 1200
             risk_level = "Very Low"
             choice_narratives.append("5% loyalty discount protects frequent buyers")
-        elif opt2 == "c2":
+        elif "combo" in opt2 or "bundle" in opt2 or "cashback" in opt2 or opt2 == "c2":
             rev_gain_pct += 4.5
             profit_gain_monthly += 2800
             working_cap_needed += 1500
             choice_narratives.append("Combo bundling expands average basket spend")
-        elif opt2 == "c3":
+        elif "credit" in opt2:
+            profit_gain_monthly += 1500
+            choice_narratives.append("7-day trade credit window builds customer volume")
+        else:
             choice_narratives.append("Transparent mandi communication maintains trust")
 
         # Step 3: Deployment of capital
-        if opt3 == "d1":
+        if "procure" in opt3 or "reinvest" in opt3 or opt3 == "d1":
             rev_gain_pct += 3.0
             profit_gain_monthly += 2400
             choice_narratives.append("Bulk wholesale reinvestment unlocks volume discounts")
-        elif opt3 == "d2":
+        elif "reserve" in opt3 or "liquidity" in opt3 or opt3 == "d2":
             working_cap_needed += 4000
             risk_level = "Very Low"
             choice_narratives.append("1-month liquidity buffer cushions against volatility")
-        elif opt3 == "d3":
+        elif "clear" in opt3 or "debt" in opt3 or "vendor" in opt3 or opt3 == "d3":
             profit_gain_monthly += 1800
             choice_narratives.append("Retiring supplier debt cuts ongoing financing fees")
+        else:
+            profit_gain_monthly += 2100
+            choice_narratives.append("Digital POS upgrade speeds customer billing queues")
 
-    elif cat == "inventory":
+    elif cat == "inventory" or "sc2" in str(scenario.get("scenario_id", "")):
         # Step 1: Volume
-        if opt1 == "v3":
+        if "30day" in opt1 or "30_day" in opt1 or "direct" in opt1 or opt1 == "v3":
             rev_gain_pct = 23.0
             profit_gain_monthly = 17800
             working_cap_needed = 28000
             payback_days = 32
             risk_level = "Moderate"
-            choice_narratives.append("Direct farm purchase (300 kg) captures maximum 18% margin discount")
-        elif opt1 == "v2":
+            choice_narratives.append("30-day procurement reserve (8% supplier rebate)")
+        elif "15day" in opt1 or "15_day" in opt1 or "bulk" in opt1 or opt1 == "v2":
             rev_gain_pct = 15.5
-            profit_gain_monthly = 11400
+            profit_gain_monthly = 12400
             working_cap_needed = 14000
             payback_days = 20
             risk_level = "Low"
-            choice_narratives.append("7-day bulk order (150 kg) balances turnover and bulk savings")
+            choice_narratives.append("15-day inventory reserve balances turnover and rebate")
         else:
-            rev_gain_pct = 7.5
-            profit_gain_monthly = 5200
+            rev_gain_pct = 8.5
+            profit_gain_monthly = 6200
             working_cap_needed = 5000
             payback_days = 10
             risk_level = "Very Low"
-            choice_narratives.append("3-day safety buffer (50 kg) minimizes storage exposure")
+            choice_narratives.append("7-day just-in-time procurement minimizes holding cost")
 
         # Step 2: Financing
-        if opt2 == "f1":
-            choice_narratives.append("Funded via internal daily cashflow (0% interest)")
-        elif opt2 == "f2":
-            profit_gain_monthly -= 600
+        if "cash" in opt2 or opt2 == "f1":
+            profit_gain_monthly += 1500
+            choice_narratives.append("Upfront cash payment captures extra 2% prompt rebate")
+        elif "credit" in opt2 or opt2 == "f2":
+            profit_gain_monthly -= 400
             working_cap_needed = int(working_cap_needed * 0.4)
-            choice_narratives.append("Mandi agent 15-day credit preserves shop liquidity")
-        elif opt2 == "f3":
+            choice_narratives.append("30-day supplier trade credit preserves shop liquidity")
+        elif "split" in opt2 or "bank" in opt2 or opt2 == "f3":
             subsidy_savings = 2500
-            working_cap_needed = int(working_cap_needed * 0.2)
-            profit_gain_monthly += 1200
-            choice_narratives.append("PM SVANidhi / MUDRA subsidized credit unlocks 7% interest subvention")
+            working_cap_needed = int(working_cap_needed * 0.5)
+            profit_gain_monthly += 1800
+            choice_narratives.append("50/50 payment split / bank guarantee optimizes cashflow")
 
-        # Step 3: Risk control
-        if opt3 == "s2":
+        # Step 3: Storage & Risk
+        if "chilling" in opt3 or "crate" in opt3 or opt3 == "s2":
             profit_gain_monthly += 2200
             payback_days = max(8, payback_days - 3)
-            choice_narratives.append("Mesh cooling crates reduce spoilage losses from 7% to 1.5%")
-        elif opt3 == "s3":
+            choice_narratives.append("Environment controlled crates reduce spoilage to 1.5%")
+        elif "whatsapp" in opt3 or "preorder" in opt3 or opt3 == "s3":
             rev_gain_pct += 4.0
             payback_days = max(6, payback_days - 5)
-            choice_narratives.append("WhatsApp customer pre-orders secure guaranteed 24-hr sales")
+            choice_narratives.append("WhatsApp customer pre-orders secure guaranteed sales")
+        elif "insurance" in opt3:
+            risk_level = "Very Low"
+            choice_narratives.append("Transit insurance shields inventory against loss")
         else:
             choice_narratives.append("FIFO active shelf rotation protects fresh stock")
 
-    elif cat == "expansion":
-        # Step 1: Equipment
-        if opt1 == "e3":
+    else:
+        # Step 1: Equipment / Expansion
+        if "value" in opt1 or "processing" in opt1 or "mill" in opt1 or opt1 == "e3":
             rev_gain_pct = 36.0
             profit_gain_monthly = 28500
             working_cap_needed = 55000
             payback_days = 75
             risk_level = "Moderate"
-            choice_narratives.append("Value-add processing equipment (Spice/Packaging unit)")
-        elif opt1 == "e2":
+            choice_narratives.append("Value-add processing unit (Spice/Flour packaging)")
+        elif "cooler" in opt1 or "freezer" in opt1 or opt1 == "e2":
             rev_gain_pct = 28.0
             profit_gain_monthly = 21000
             working_cap_needed = 35000
@@ -375,25 +393,25 @@ def simulate_decision_outcome(
             choice_narratives.append("Digital weighing scale + POS billing printer")
 
         # Step 2: Subsidy channel
-        if opt2 == "g1":
+        if "pmegp" in opt2 or opt2 == "g1":
             subsidy_savings = int(working_cap_needed * 0.35)
             working_cap_needed = int(working_cap_needed * 0.65)
             payback_days = max(15, int(payback_days * 0.7))
             choice_narratives.append("PMEGP 35% margin money capital subsidy applied")
-        elif opt2 == "g2":
+        elif "svanidhi" in opt2 or opt2 == "g2":
             subsidy_savings = 3500
             working_cap_needed = max(2000, working_cap_needed - 15000)
-            choice_narratives.append("PM SVANidhi 3rd Tranche with 7% interest rebate & digital cashback")
-        elif opt2 == "g3":
+            choice_narratives.append("PM SVANidhi with 7% interest rebate & digital cashback")
+        elif "mudra" in opt2 or opt2 == "g3":
             subsidy_savings = 2000
             choice_narratives.append("MUDRA Kishore collateral-free term credit")
 
-        # Step 3: Timeline & Strategy
-        if opt3 == "t1":
-            payback_days = min( paybacks := payback_days, 40)
+        # Step 3: Timeline
+        if "fast" in opt3 or "3month" in opt3 or opt3 == "t1":
+            payback_days = min(payback_days, 40)
             rev_gain_pct += 3.5
             choice_narratives.append("Aggressive 3-month payback with active digital transaction rewards")
-        elif opt3 == "t3":
+        elif "12month" in opt3 or "scaling" in opt3 or opt3 == "t3":
             rev_gain_pct += 8.0
             profit_gain_monthly += 6000
             choice_narratives.append("12-month multi-point scaling horizon")
@@ -401,13 +419,15 @@ def simulate_decision_outcome(
             choice_narratives.append("Steady 6-month payback paced with subsidy disbursement")
 
     scheme = scenario.get("scheme_match", {})
-    subsidy_text = f" You can also save up to ₹{subsidy_savings:,} via matched subsidies." if subsidy_savings > 0 else ""
+    subsidy_text = f" Matched subsidy savings: ₹{subsidy_savings:,}." if subsidy_savings > 0 else ""
+    narrative_str = " | ".join(choice_narratives)
 
     default_blueprint = (
         f"Simulated Outcome for '{scenario.get('scenario_title', scenario.get('title', 'Strategy'))}': "
         f"Projected gross revenue growth is +{rev_gain_pct:.1f}% "
         f"(+₹{profit_gain_monthly:,} net profit/month). Out-of-pocket capital required: ₹{working_cap_needed:,} "
         f"with estimated payback in {payback_days} days (Risk: {risk_level}).{subsidy_text} "
+        f"Execution Plan: {narrative_str}. "
         f"Recommended scheme: {scheme.get('scheme_name', 'PM SVANidhi')} ({scheme.get('benefit', '7% interest subvention')})."
     )
 
@@ -437,12 +457,10 @@ Return ONLY JSON."""
         clean_json = llm_res.strip().replace("```json", "").replace("```", "").strip()
         parsed = json.loads(clean_json)
 
-        profit_gain_monthly = int(parsed.get("projected_profit_gain_monthly_inr", profit_gain_monthly))
-        rev_gain_pct = float(parsed.get("projected_revenue_growth_pct", rev_gain_pct))
-        working_cap_needed = int(parsed.get("working_capital_required_inr", working_cap_needed))
-        payback_days = int(parsed.get("estimated_payback_days", payback_days))
-        risk_level = str(parsed.get("risk_level", risk_level))
-        blueprint_text = str(parsed.get("executive_blueprint", default_blueprint))
+        if "executive_blueprint" in parsed and parsed["executive_blueprint"]:
+            blueprint_text = str(parsed["executive_blueprint"])
+        else:
+            blueprint_text = default_blueprint
     except Exception as llm_err:
         logger.warning(f"Featherless AI decision evaluation fallback: {llm_err}")
         blueprint_text = default_blueprint
