@@ -16,8 +16,8 @@ router = APIRouter()
 
 class SimulateRequest(BaseModel):
     business_id: str
-    scenario: Dict[str, Any]
-    choices: Dict[int, str]
+    scenario: Dict[str, Any] = {}
+    choices: Dict[Any, Any] = {}
     language: Language = Language.ENGLISH
 
 

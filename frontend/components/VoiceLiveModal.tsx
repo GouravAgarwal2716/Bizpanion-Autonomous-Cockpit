@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { Mic, MicOff, Volume2, VolumeX, X, Sparkles, ExternalLink, ShieldCheck, ArrowRight } from 'lucide-react';
-import { startVoiceSession, sendVoiceTurn } from '@/lib/api';
+import { startVoiceSession, sendVoiceTurn, getApiUrl } from '@/lib/api';
 import { t, type Lang } from '@/lib/i18n';
 
 interface VoiceLiveModalProps {
@@ -70,7 +70,7 @@ export default function VoiceLiveModal({ isOpen, onClose, businessId, initialLan
 
   function playAssistantAudio(url: string, text?: string) {
     setStatus('speaking');
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bizpanion-autonomous-cockpit-backend.onrender.com';
+    const API_URL = getApiUrl();
     const fullUrl = url ? (url.startsWith('http') ? url : `${API_URL}${url}`) : '';
     
     if (audioPlayerRef.current) {

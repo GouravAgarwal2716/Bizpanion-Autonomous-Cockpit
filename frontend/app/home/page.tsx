@@ -14,11 +14,9 @@ import {
   getProfile, 
   getStoredUserId,
   getDashboardOverview
-} from '@/lib/api';
-import { generateExecutiveReportPDF } from '@/lib/pdfGenerator';
-import { getLang, type Lang, t } from '@/lib/i18n';
+import { getApiUrl } from '@/lib/api';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bizpanion-autonomous-cockpit-backend.onrender.com';
+const API_URL = getApiUrl();
 
 function Sparkline({ data, color = '#eab308', height = 32 }: { data: number[]; color?: string; height?: number }) {
   if (!data || data.length < 2) return null;

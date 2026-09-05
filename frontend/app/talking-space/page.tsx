@@ -9,7 +9,8 @@ import NavSidebar from '@/components/NavSidebar';
 import { 
   getStoredBusinessId, 
   startVoiceSession, 
-  sendVoiceTurn, 
+  sendVoiceTurn,
+  getApiUrl,
 } from '@/lib/api';
 import { getLang, type Lang, LANGUAGE_NAMES, t } from '@/lib/i18n';
 
@@ -107,7 +108,7 @@ export default function TalkingSpacePage() {
       audioPlayerRef.current.pause();
     }
 
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bizpanion-autonomous-cockpit-backend.onrender.com';
+    const API_URL = getApiUrl();
     const fullUrl = url.startsWith('http') ? url : `${API_URL}${url}`;
     const audio = new Audio(fullUrl);
     audioPlayerRef.current = audio;

@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { Download, Play, Pause, Headphones, FileText, BarChart2 } from 'lucide-react';
 import NavSidebar from '@/components/NavSidebar';
-import { getStoredBusinessId, getAlerts, getDashboardOverview } from '@/lib/api';
+import { getStoredBusinessId, getAlerts, getDashboardOverview, getApiUrl } from '@/lib/api';
 import { generateExecutiveReportPDF } from '@/lib/pdfGenerator';
 import { getLang, type Lang, t } from '@/lib/i18n';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bizpanion-autonomous-cockpit-backend.onrender.com';
+const API_URL = getApiUrl();
 
 export default function ReportsPage() {
   const [lang, setLang] = useState<Lang>('en');

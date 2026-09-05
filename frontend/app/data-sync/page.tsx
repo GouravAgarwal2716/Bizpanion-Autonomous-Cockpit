@@ -14,6 +14,7 @@ import {
   checkTallyConnection, 
   loadSampleDataset,
   simulateTallySync,
+  getApiUrl,
   type UploadStep, 
   type UploadComplete 
 } from '@/lib/api';
@@ -164,7 +165,7 @@ export default function DataSyncPage() {
     try {
       const bizName = profile?.business_name || (typeof window !== 'undefined' ? localStorage.getItem('bizpanion_business_name') : null) || 'Enterprise';
       const phone = profile?.whatsapp_number || (typeof window !== 'undefined' ? localStorage.getItem('bizpanion_whatsapp') : null) || '9518948695';
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://bizpanion-autonomous-cockpit-backend.onrender.com';
+      const API_URL = getApiUrl();
       await fetch(`${API_URL}/api/alerts/dispatch-whatsapp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
